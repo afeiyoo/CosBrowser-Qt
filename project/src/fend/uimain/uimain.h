@@ -7,16 +7,21 @@ namespace Ui {
 class UiMain;
 }
 
-class UiMain : public QWidget
-{
-    Q_OBJECT
+class LoginDialog;
+
+class UiMain : public QWidget {
+  Q_OBJECT
 
 public:
-    explicit UiMain(QWidget *parent = nullptr);
-    ~UiMain();
+  explicit UiMain(QWidget *parent = nullptr);
+  ~UiMain();
+
+  void showLoginDialog();
 
 private:
-    Ui::UiMain *ui;
+  Ui::UiMain *ui;
+
+    LoginDialog *m_loginDialog = nullptr;
 };
 
 #endif // UIMAIN_H

@@ -7,13 +7,15 @@ namespace Ui {
 class ToolBarWidget;
 }
 
-class ToolBarWidget : public QWidget
-{
+class ToolBarWidget : public QWidget {
     Q_OBJECT
 
 public:
     explicit ToolBarWidget(QWidget *parent = nullptr);
     ~ToolBarWidget();
+
+signals:
+    void quitLogin();
 
 private:
     Ui::ToolBarWidget *ui;
