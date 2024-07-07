@@ -17,6 +17,8 @@ public:
 signals:
     void quitLogin();
 
+private slots:
+
 private:
     Ui::ToolBarWidget *ui;
 };

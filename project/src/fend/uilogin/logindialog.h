@@ -2,6 +2,7 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
+#include <QMouseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginDialog; }
@@ -15,6 +16,10 @@ public:
     LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
 
+protected:
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+
 private slots:
     void on_btnLogin_clicked();
 
@@ -22,5 +27,6 @@ private slots:
 
 private:
     Ui::LoginDialog *ui;
+    QPoint m_start;
 };
 #endif // LOGINDIALOG_H
