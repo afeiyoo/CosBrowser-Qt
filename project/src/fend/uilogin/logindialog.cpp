@@ -11,6 +11,8 @@ LoginDialog::LoginDialog(QWidget *parent)
     QPixmap pixmap(
         "F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/qt.png");
     ui->labelLogo->setPixmap(pixmap.scaled(ui->labelLogo->size()));
+
+    ui->lineSecretKey->installEventFilter(this);    // 对lineSecretKey安装事件过滤器
 }
 
 LoginDialog::~LoginDialog() { delete ui; }
@@ -30,6 +32,20 @@ void LoginDialog::mouseMoveEvent(QMouseEvent *event)
         this->move(targetPos);
     }
     QDialog::mouseMoveEvent(event);
+}
+
+bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
+{
+    // watched表示需要关注的控件对象 event表示传递给事件对象的事件
+    if(watched == ui->lineSecretKey){
+        if(event->type() == QEvent::KeyPress){
+            QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+            if(keyEvent->modifiers() == Qt::ControlModifier){
+                if(keyEvent->key() == Qt::Key_C || keyEvent->key() == Qt::Key_V)
+                    return true;    // true表示事件已被处理，不再往下传递，false表示继续传递到子控件
+            }
+        }
+    }
 }
 
 void LoginDialog::on_btnLogin_clicked() {

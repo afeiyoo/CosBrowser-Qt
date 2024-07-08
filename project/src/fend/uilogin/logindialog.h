@@ -19,6 +19,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
+    bool eventFilter(QObject *watched, QEvent *event);
 
 private slots:
     void on_btnLogin_clicked();
