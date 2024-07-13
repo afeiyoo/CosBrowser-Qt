@@ -8,9 +8,16 @@ LoginDialog::LoginDialog(QWidget *parent)
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
 
-    QPixmap pixmap(
-        "F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/qt.png");
-    ui->labelLogo->setPixmap(pixmap.scaled(ui->labelLogo->size()));
+    // QPixmap pixmap(
+    //     "F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/qt.png");
+    // ui->labelLogo->setPixmap(pixmap.scaled(ui->labelLogo->size()));
+
+    ui->labelTitle->setProperty("style", "h3");
+    ui->labelSecretId->setProperty("style", "h4");
+    ui->labelSecretKey->setProperty("style", "h4");
+    ui->labelRemark->setProperty("style", "h4");
+    ui->btnClose->setProperty("style", "h4");
+    ui->btnLogin->setProperty("style", "h4");
 
     ui->lineSecretKey->installEventFilter(this);    // 对lineSecretKey安装事件过滤器
 }

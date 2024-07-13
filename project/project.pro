@@ -17,7 +17,8 @@ SOURCES += \
     src/fend/uimain/bucketswidget.cpp \
     src/fend/uimain/objectswidget.cpp \
     src/fend/uimain/toolbarwidget.cpp \
-    src/fend/uimain/uimain.cpp
+    src/fend/uimain/uimain.cpp \
+    src/helper/filehelper.cpp
 
 HEADERS += \
     src/fend/uicom/breadwidget.h \
@@ -27,7 +28,8 @@ HEADERS += \
     src/fend/uimain/bucketswidget.h \
     src/fend/uimain/objectswidget.h \
     src/fend/uimain/toolbarwidget.h \
-    src/fend/uimain/uimain.h
+    src/fend/uimain/uimain.h \
+    src/helper/filehelper.h
 
 FORMS += \
     src/fend/uicom/breadwidget.ui \
