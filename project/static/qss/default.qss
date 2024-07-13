@@ -48,7 +48,7 @@ QLabel{
 QLabel#labelLogo{
 	min-width: 32px;
 	min-height: 32px;
-	border-image: url("F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/static/imgs/qt.png");
+        border-image: url(":/static/imgs/qt.png");
 }
 
 /*通用按钮设置*/
