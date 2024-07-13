@@ -1,4 +1,4 @@
-﻿#include "logindialog.h"
+#include "logindialog.h"
 #include "ui_logindialog.h"
 
 #include <QMessageBox>
@@ -62,8 +62,8 @@ void LoginDialog::on_btnLogin_clicked() {
         accept();
     } else {
         QMessageBox::warning(
-            this, QString::fromLocal8Bit("登录失败"),
-            QString::fromLocal8Bit("请检查SecretId或SecretKey是否正确"));
+            this, QString::fromUtf8("登录失败"),
+            QString::fromUtf8("请检查SecretId或SecretKey是否正确"));
     }
 }
 
