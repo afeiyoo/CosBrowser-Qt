@@ -57,8 +57,8 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
 
 void LoginDialog::on_btnLogin_clicked() {
     // 登录信息验证
-    if (ui->lineSecretId->text().trimmed() == "zhangsan" &&
-        ui->lineSecretKey->text().trimmed() == "123") {
+    if (ui->lineSecretId->text().trimmed() == "" &&
+        ui->lineSecretKey->text().trimmed() == "") {
         accept();
     } else {
         QMessageBox::warning(

@@ -21,7 +21,6 @@ void ManBuckets::setBuckets()
     DaoBuckets dao;
     QList<MyBucket> buckets  = dao.bucketsFromMock(":/static/testing/buckets2.json");
     m_model->setRowCount(buckets.size());
-    m_model->setColumnCount(3);
     for(int i = 0; i < buckets.size(); ++i){
         const MyBucket& bucket = buckets[i];
         QModelIndex index0 = m_model->index(i, 0);
@@ -34,8 +33,8 @@ void ManBuckets::setBuckets()
         QModelIndex index2 = m_model->index(i, 2);
         m_model->setData(index2, bucket.createDate);
     }
-
-    qDebug() << "setBuckets";
+    // 按第3列降序排序
+    m_model->sort(2, Qt::DescendingOrder);
 }
 
 QStandardItemModel *ManBuckets::model() const
