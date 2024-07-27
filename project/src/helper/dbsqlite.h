@@ -14,6 +14,8 @@ public:
 
     void connect(const QString &dbPath);
 
+    void exec(const QString &sql);
+
 private:
     QSqlDatabase m_db;
 };

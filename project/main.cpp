@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     UiMain w;
     w.showLoginDialog();
 
-
     MB->setBuckets();
 
     return a.exec();
