@@ -1,5 +1,8 @@
 #include "dbsqlite.h"
 
+#include <QSqlRecord>
+#include <QDebug>
+
 
 DBSqlite::DBSqlite() {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
@@ -34,4 +37,25 @@ bool DBSqlite::exists(const QString &sql)
 {
     QSqlQuery query = exec(sql);
     return query.next();
+}
+
+QList<RECORD> DBSqlite::select(const QString& sql)
+{
+    QList<RECORD> retList;
+    QSqlQuery query = exec(sql);
+
+    while(query.next()){
+        RECORD ret;
+
+        QSqlRecord record = query.record(); // 数据库中的一行记录
+        for(int i = 0; i < record.count(); ++i){
+            QString name = record.fieldName(i);
+            QVariant value = record.value(i);
+            ret[name] = value;
+        }
+        qDebug() << QString("查询出结果") << ret;
+        retList.append(ret);
+    }
+
+    return retList;
 }

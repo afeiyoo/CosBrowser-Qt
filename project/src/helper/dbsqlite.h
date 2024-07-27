@@ -5,6 +5,10 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QList>
+#include <QVariant>
+
+typedef QMap<QString, QVariant> RECORD;
 
 class DBSqlite
 {
@@ -18,6 +22,8 @@ public:
     QSqlQuery exec(const QString &sql);
 
     bool exists(const QString &sql);
+
+    QList<RECORD> select(const QString &sql);
 
 private:
     QSqlDatabase m_db;

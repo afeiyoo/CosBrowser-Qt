@@ -17,6 +17,7 @@ UiMain::~UiMain() {
 void UiMain::showLoginDialog() {
     if (m_loginDialog == nullptr) {
         m_loginDialog = new LoginDialog();
+        m_loginDialog->updateLoginInfo();   // 更新缓存
         connect(m_loginDialog, &LoginDialog::accepted, this, &UiMain::show);
         connect(ui->widgetToolBar, &ToolBarWidget::quitLogin, this, &UiMain::showLoginDialog);
     }

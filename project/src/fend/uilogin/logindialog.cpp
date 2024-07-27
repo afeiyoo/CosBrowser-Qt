@@ -2,6 +2,7 @@
 #include "src/bend/man/mandb.h"
 #include "ui_logindialog.h"
 
+#include <QCompleter>
 #include <QMessageBox>
 
 LoginDialog::LoginDialog(QWidget *parent)
@@ -25,6 +26,22 @@ LoginDialog::LoginDialog(QWidget *parent)
 }
 
 LoginDialog::~LoginDialog() { delete ui; }
+
+void LoginDialog::updateLoginInfo()
+{
+    QStringList words = MDB->loginNameList();
+    QCompleter* completer = new QCompleter(words);
+    ui->lineLoginName->setCompleter(completer);
+
+    connect(completer, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated),
+            [&](const QString& name){
+                LoginInfo info = MDB->loginInfoByName(name);
+                ui->lineSecretId->setText(info.secret_id);
+                ui->lineSecretKey->setText(info.secret_key);
+                ui->lineRemark->setText(info.remark);
+                ui->checkSaveSection->setChecked(true);
+            });
+}
 
 void LoginDialog::mousePressEvent(QMouseEvent *event)
 {
@@ -72,6 +89,7 @@ void LoginDialog::on_btnLogin_clicked() {
             // 删除登录信息
             MDB->removeLoginInfo(ui->lineSecretId->text());
         }
+        updateLoginInfo();  // 更新缓存
     } else {
         QMessageBox::warning(
             this, QString::fromUtf8("登录失败"),
