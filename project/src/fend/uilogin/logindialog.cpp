@@ -1,4 +1,5 @@
 #include "logindialog.h"
+#include "src/bend/man/mandb.h"
 #include "ui_logindialog.h"
 
 #include <QMessageBox>
@@ -14,6 +15,7 @@ LoginDialog::LoginDialog(QWidget *parent)
 
     ui->labelTitle->setProperty("style", "h3");
     ui->labelSecretId->setProperty("style", "h4");
+    ui->labelLoginName->setProperty("style", "h4");
     ui->labelSecretKey->setProperty("style", "h4");
     ui->labelRemark->setProperty("style", "h4");
     ui->btnClose->setProperty("style", "h4");
@@ -57,9 +59,19 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
 
 void LoginDialog::on_btnLogin_clicked() {
     // 登录信息验证
-    if (ui->lineSecretId->text().trimmed() == "" &&
-        ui->lineSecretKey->text().trimmed() == "") {
+    if (ui->lineSecretId->text().trimmed() == "zhangsan" &&
+        ui->lineSecretKey->text().trimmed() == "123") {
         accept();
+        if(ui->checkSaveSection->isChecked()){
+            // 保存登录信息
+            MDB->saveLoginInfo(ui->lineLoginName->text(),
+                               ui->lineSecretId->text(),
+                               ui->lineSecretKey->text(),
+                               ui->lineRemark->text());
+        }else{
+            // 删除登录信息
+            MDB->removeLoginInfo(ui->lineSecretId->text());
+        }
     } else {
         QMessageBox::warning(
             this, QString::fromUtf8("登录失败"),

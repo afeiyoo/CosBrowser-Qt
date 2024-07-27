@@ -4,6 +4,7 @@
 #include <QString>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSqlQuery>
 
 class DBSqlite
 {
@@ -14,7 +15,9 @@ public:
 
     void connect(const QString &dbPath);
 
-    void exec(const QString &sql);
+    QSqlQuery exec(const QString &sql);
+
+    bool exists(const QString &sql);
 
 private:
     QSqlDatabase m_db;

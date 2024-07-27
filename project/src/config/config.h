@@ -19,6 +19,10 @@ namespace SQL {
 static const QString LOGIN_INFO_TABLE = ":/static/sql/login_info.sql";
 }; // namespace SQL
 
+namespace TABLES {
+static const QString LOGIN_INFO = "login_info";
+}; // namespace TABLES
+
 static bool init(){
     return FileHelper::mkPath(PATH::TMP);
 }

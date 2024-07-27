@@ -1,6 +1,5 @@
 #include "dbsqlite.h"
 
-#include <QSqlQuery>
 
 DBSqlite::DBSqlite() {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
@@ -21,10 +20,18 @@ void DBSqlite::connect(const QString &dbPath)
     }
 }
 
-void DBSqlite::exec(const QString &sql)
+QSqlQuery DBSqlite::exec(const QString &sql)
 {
     QSqlQuery query;
     if(!query.exec(sql)){
         throw QString::fromLocal8Bit("执行失败: %1 %2").arg(sql, query.lastError().text());
     }
+
+    return query;
+}
+
+bool DBSqlite::exists(const QString &sql)
+{
+    QSqlQuery query = exec(sql);
+    return query.next();
 }
