@@ -18,10 +18,17 @@ public:
 
   void showLoginDialog();
 
+private slots:
+  void onButtonClicked(const QString &text);
+  void onUpload();
+  void onDownload();
+  void onRefresh();
+  void onUnLogin();
+
 private:
   Ui::UiMain *ui;
 
-    LoginDialog *m_loginDialog = nullptr;
+  LoginDialog *m_loginDialog = nullptr;
 };
 
 #endif // UIMAIN_H

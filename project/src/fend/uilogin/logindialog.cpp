@@ -33,8 +33,10 @@ void LoginDialog::updateLoginInfo()
     QCompleter* completer = new QCompleter(words);
     ui->lineLoginName->setCompleter(completer);
 
-    connect(completer, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated),
-            [&](const QString& name){
+    connect(completer,
+            static_cast<void (QCompleter::*)(const QString &)>(
+                &QCompleter::activated),
+            [&](const QString &name) {
                 LoginInfo info = MDB->loginInfoByName(name);
                 ui->lineSecretId->setText(info.secret_id);
                 ui->lineSecretKey->setText(info.secret_key);
