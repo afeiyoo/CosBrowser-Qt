@@ -27,7 +27,25 @@ QSqlQuery DBSqlite::exec(const QString &sql)
 {
     QSqlQuery query;
     if(!query.exec(sql)){
-        throw QString::fromLocal8Bit("执行失败: %1 %2").arg(sql, query.lastError().text());
+        throw QString("执行失败: %1 %2").arg(sql, query.lastError().text());
+    }
+
+    return query;
+}
+
+QSqlQuery DBSqlite::exec(const QString &sql, const QVariantList &variantList)
+{
+    QSqlQuery query;
+    if(!query.prepare(sql)){
+        throw QString("预编译sql失败: %1 %2").arg(sql, query.lastError().text());
+    }
+
+    for(const auto& var : variantList){
+        query.addBindValue(var);
+    }
+
+    if(!query.exec()){
+        throw QString("执行sql bindvalue失败: %1 %2").arg(sql, query.lastError().text());
     }
 
     return query;
