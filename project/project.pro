@@ -14,7 +14,6 @@ SOURCES += \
     src/bend/dao/daologininfo.cpp \
     src/bend/man/manbuckets.cpp \
     src/bend/man/mandb.cpp \
-    src/bend/models/mybucket.cpp \
     src/fend/uicom/breadwidget.cpp \
     src/fend/uicom/mylineedit.cpp \
     src/fend/uicom/pagewidget.cpp \
@@ -25,7 +24,8 @@ SOURCES += \
     src/fend/uimain/toolbarwidget.cpp \
     src/fend/uimain/uimain.cpp \
     src/helper/dbsqlite.cpp \
-    src/helper/filehelper.cpp
+    src/helper/filehelper.cpp \
+    src/middle/models/mybucket.cpp
 
 HEADERS += \
     src/bend/dao/daobuckets.h \
@@ -33,7 +33,6 @@ HEADERS += \
     src/bend/man/manbuckets.h \
     src/bend/man/mandb.h \
     src/bend/models/dbmodels.h \
-    src/bend/models/mybucket.h \
     src/config/config.h \
     src/fend/uicom/breadwidget.h \
     src/fend/uicom/mylineedit.h \
@@ -45,7 +44,9 @@ HEADERS += \
     src/fend/uimain/toolbarwidget.h \
     src/fend/uimain/uimain.h \
     src/helper/dbsqlite.h \
-    src/helper/filehelper.h
+    src/helper/filehelper.h \
+    src/middle/models/dbmodels.h \
+    src/middle/models/mybucket.h
 
 FORMS += \
     src/fend/uicom/breadwidget.ui \

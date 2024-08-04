@@ -1,7 +1,7 @@
 #ifndef DAOLOGININFO_H
 #define DAOLOGININFO_H
 
-#include "src/bend/models/dbmodels.h"
+#include "src/middle/models/dbmodels.h"
 #include "src/helper/dbsqlite.h"
 
 class DaoLoginInfo {
