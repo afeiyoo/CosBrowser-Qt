@@ -1,11 +1,11 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
 #include "src/helper/filehelper.h"
 #include <QString>
 #include <QDir>
 
-namespace CONF {
+namespace GLOBAL {
 namespace PATH {
 static const QString WORK = QDir::currentPath();
 static const QString TMP = FileHelper::joinPath(WORK, "tmp");
@@ -23,12 +23,26 @@ namespace TABLES {
 static const QString LOGIN_INFO = "login_info";
 }; // namespace TABLES
 
+namespace VERSION {
+static const QString MAJOR_CUSTOM = "custom";
+static const QString MAJOR_BUSINESS = "business";
+static const QString JSON_PATH = ":/static/versions/config_default.json";
+};
+
+namespace ENV {
+static const QString ENV_DEV= "dev";
+static const QString ENV_ALPHA = "alpha";
+static const QString ENV_BETA = "beta";
+static const QString ENV_PRE = "pre";
+static const QString ENV_PROD = "prod";
+};
+
 static bool init(){
     return FileHelper::mkPath(PATH::TMP);
 }
 
 static bool OK = init();
 
-} // namespace CONF
+} // namespace GLOBAL
 
-#endif // CONFIG_H
+#endif // GLOBALS_H

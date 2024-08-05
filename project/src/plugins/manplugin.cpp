@@ -1,12 +1,21 @@
 #include "manplugin.h"
 #include "src/bend/dao/clouds/daocloudsmock.h"
+#include "src/bend/dao/configs/versioncmd.h"
+#include "src/bend/dao/configs/versionjson.h"
+
 
 Q_GLOBAL_STATIC(ManPlugin, ins);
 
 ManPlugin::ManPlugin(QObject *parent)
     : QObject{parent}
 {
-    installPlugins();
+
+}
+
+ManPlugin::~ManPlugin()
+{
+    delete m_clouds;
+    delete m_version;
 }
 
 ManPlugin *ManPlugin::instance()
@@ -14,10 +23,22 @@ ManPlugin *ManPlugin::instance()
     return ins();
 }
 
-void ManPlugin::installPlugins()
+void ManPlugin::installPlugins(int argc, char *argv[])
 {
-    // 创建所有插件
-    m_clouds = new DaoCloudsMock(":/static/testing/buckets2.json");
+    // 如果输入命令行，则命令行参数优先级最高，否则直接加载配置文件中的配置信息
+    VersionCmd version(argc, argv);
+    if(version.isValid()){
+        m_version = new VersionCmd(argc, argv);
+    }else{
+        m_version = new VersionJson(VERSION::JSON_PATH);
+    }
+    m_version->setVersion();
+
+    if(m_version->major() == VERSION::MAJOR_BUSINESS){
+        m_clouds = new DaoCloudsMock(":/static/testing/business.json");
+    }else{
+        m_clouds = new DaoCloudsMock(":/static/testing/custom.json");
+    }
 }
 
 DaoClouds *ManPlugin::clouds() const
