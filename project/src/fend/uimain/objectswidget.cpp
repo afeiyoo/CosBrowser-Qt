@@ -1,5 +1,5 @@
 #include "objectswidget.h"
-#include "src/bend/man/manbuckets.h"
+#include "src/bend/man/mancloud.h"
 #include "src/fend/uidelegate/bucketdelegate.h"
 #include "ui_objectswidget.h"
 
@@ -8,12 +8,12 @@ ObjectsWidget::ObjectsWidget(QWidget *parent)
     , ui(new Ui::ObjectsWidget)
 {
     ui->setupUi(this);
-    ui->tableView->setModel(MB->model());
+    ui->tableView->setModel(MC->model());
     // 为第1列（从0开始）指定代理
     ui->tableView->setItemDelegateForColumn(1, new BucketDelegate());
 
     // 设置标题内容
-    QStandardItemModel *model = MB->model();
+    QStandardItemModel *model = MC->model();
     QStringList labels;
     labels << QString("桶名称") << QString("地区")
            << QString("创建时间");

@@ -1,5 +1,5 @@
- #ifndef MYBUCKET_H
-#define MYBUCKET_H
+#ifndef CLOUDMODELS_H
+#define CLOUDMODELS_H
 
 #include <QString>
 
@@ -11,4 +11,4 @@ struct MyBucket
     QString createDate;
 };
 
-#endif // MYBUCKET_H
+#endif // CLOUDMODELS_H

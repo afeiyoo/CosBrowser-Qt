@@ -1,25 +1,27 @@
-#include "manbuckets.h"
-#include "src/bend/dao/daobuckets.h"
+#include "mancloud.h"
+#include "src/middle/models/cloudmodels.h"
+#include "src/bend/dao/clouds/daoclouds.h"
+#include "src/plugins/manplugin.h"
 #include <QDebug>
 
 // 创建单例
-Q_GLOBAL_STATIC(ManBuckets, ins);
+Q_GLOBAL_STATIC(ManCloud, ins);
 
-ManBuckets::ManBuckets(QObject *parent)
+ManCloud::ManCloud(QObject *parent)
     : QObject{parent}
 {
     m_model = new QStandardItemModel(this);
 }
 
-ManBuckets *ManBuckets::instance()
+ManCloud *ManCloud::instance()
 {
     return ins();
 }
 
-void ManBuckets::setBuckets()
+void ManCloud::setBuckets()
 {
-    DaoBuckets dao;
-    QList<MyBucket> buckets  = dao.bucketsFromMock(":/static/testing/buckets2.json");
+    DaoClouds *dao = MP->clouds();
+    QList<MyBucket> buckets  = dao->buckets();
     m_model->setRowCount(buckets.size());
     for(int i = 0; i < buckets.size(); ++i){
         const MyBucket& bucket = buckets[i];
@@ -37,7 +39,7 @@ void ManBuckets::setBuckets()
     m_model->sort(2, Qt::DescendingOrder);
 }
 
-QStandardItemModel *ManBuckets::model() const
+QStandardItemModel *ManCloud::model() const
 {
     return m_model;
 }

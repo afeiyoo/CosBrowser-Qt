@@ -1,19 +1,19 @@
-#ifndef MANBUCKETS_H
-#define MANBUCKETS_H
+#ifndef MANCLOUD_H
+#define MANCLOUD_H
 
 #include <QObject>
 #include <QStandardItemModel>
 
-#define MB ManBuckets::instance()
+#define MC ManCloud::instance()
 
-class ManBuckets : public QObject {
+class ManCloud : public QObject {
     Q_OBJECT
 public:
     // 对于使用Qt宏创建单例
     // 不要使用ManBuckets构造函数创建对象，直接使用instance来使用对象即可
-    explicit ManBuckets(QObject *parent = nullptr);
+    explicit ManCloud(QObject *parent = nullptr);
 
-    static ManBuckets *instance();
+    static ManCloud *instance();
 
     void setBuckets();
 
@@ -26,4 +26,4 @@ private:
     QStandardItemModel* m_model = nullptr;
 };
 
-#endif // MANBUCKETS_H
+#endif // MANCLOUD_H

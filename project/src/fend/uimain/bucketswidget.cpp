@@ -1,5 +1,5 @@
 #include "bucketswidget.h"
-#include "src/bend/man/manbuckets.h"
+#include "src/bend/man/mancloud.h"
 #include "ui_bucketswidget.h"
 
 BucketsWidget::BucketsWidget(QWidget *parent)
@@ -7,7 +7,7 @@ BucketsWidget::BucketsWidget(QWidget *parent)
     , ui(new Ui::BucketsWidget)
 {
     ui->setupUi(this);
-    ui->listView->setModel(MB->model());
+    ui->listView->setModel(MC->model());
 }
 
 BucketsWidget::~BucketsWidget()

@@ -1,21 +1,20 @@
-#include "daologininfo.h"
-
+#include "daologininfosqlite.h"
 #include "src/config/config.h"
 
-DaoLoginInfo::DaoLoginInfo() {}
+DaoLoginInfoSqlite::DaoLoginInfoSqlite() {}
 
-void DaoLoginInfo::connect()
+void DaoLoginInfoSqlite::connect()
 {
     m_db.connect(CONF::SQLITE::NAME);
 }
 
-void DaoLoginInfo::createTable()
+void DaoLoginInfoSqlite::createTable()
 {
     QString sql = FileHelper::readAllTxt(CONF::SQL::LOGIN_INFO_TABLE);
     m_db.exec(sql);
 }
 
-bool DaoLoginInfo::exists(const QString &secretId)
+bool DaoLoginInfoSqlite::exists(const QString &secretId)
 {
     QString sql = QString(
                       "select id from %1 where  "
@@ -24,7 +23,7 @@ bool DaoLoginInfo::exists(const QString &secretId)
     return m_db.exists(sql);
 }
 
-void DaoLoginInfo::insert(const LoginInfo &info) {
+void DaoLoginInfoSqlite::insert(const LoginInfo &info) {
     QString sql = QString(
                       "insert into %1 (name, secret_id, secret_key, remark, timestamp) "
                       "values (?, ?, ?, ?, ?)").arg(CONF::TABLES::LOGIN_INFO);
@@ -37,7 +36,7 @@ void DaoLoginInfo::insert(const LoginInfo &info) {
     m_db.exec(sql, varList);
 }
 
-void DaoLoginInfo::update(const LoginInfo &info)
+void DaoLoginInfoSqlite::update(const LoginInfo &info)
 {
     QString sql = QString(
                       "update %1 "
@@ -56,7 +55,7 @@ void DaoLoginInfo::update(const LoginInfo &info)
     m_db.exec(sql, varList);
 }
 
-void DaoLoginInfo::remove(const QString &secretId)
+void DaoLoginInfoSqlite::remove(const QString &secretId)
 {
     QString sql = QString(
                       "delete from %1 where  "
@@ -67,7 +66,7 @@ void DaoLoginInfo::remove(const QString &secretId)
     m_db.exec(sql, varList);
 }
 
-QList<LoginInfo> DaoLoginInfo::select()
+QList<LoginInfo> DaoLoginInfoSqlite::select()
 {
     QString sql = QString(
                       "select name, secret_id, secret_key, remark from %1 "

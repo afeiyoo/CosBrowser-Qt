@@ -1,4 +1,4 @@
-#include "src/bend/man/manbuckets.h"
+#include "src/bend/man/mancloud.h"
 #include "src/bend/man/mandb.h"
 #include "src/fend/uimain/uimain.h"
 #include "src/helper/filehelper.h"
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     UiMain w;
     w.showLoginDialog();
 
-    MB->setBuckets();
+    MC->setBuckets();
 
     return a.exec();
 }
