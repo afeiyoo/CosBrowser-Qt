@@ -1,4 +1,5 @@
 #include "dbsqlite.h"
+#include "src/config/loggerproxy.h"
 
 #include <QSqlRecord>
 #include <QDebug>
@@ -71,7 +72,8 @@ QList<RECORD> DBSqlite::select(const QString& sql)
             QVariant value = record.value(i);
             ret[name] = value;
         }
-        qDebug() << QString("查询出结果") << ret;
+        mInfo(QString("查询出结果如下: "));
+        mInfo(ret);
         retList.append(ret);
     }
 
