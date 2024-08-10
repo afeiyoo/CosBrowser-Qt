@@ -10,25 +10,25 @@ class UiMain;
 class LoginDialog;
 
 class UiMain : public QWidget {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit UiMain(QWidget *parent = nullptr);
-  ~UiMain();
+    explicit UiMain(QWidget *parent = nullptr);
+    ~UiMain();
 
-  void showLoginDialog();
+    void showLoginDialog();
 
 private slots:
-  void onButtonClicked(const QString &text);
-  void onUpload();
-  void onDownload();
-  void onRefresh();
-  void onUnLogin();
+    void onButtonClicked(const QString &text);
+    void onUpload();
+    void onDownload();
+    void onRefresh();
+    void onUnLogin();
 
 private:
-  Ui::UiMain *ui;
+    Ui::UiMain *ui;
 
-  LoginDialog *m_loginDialog = nullptr;
+    LoginDialog *m_loginDialog = nullptr;
 };
 
-#endif // UIMAIN_H
+#endif  // UIMAIN_H

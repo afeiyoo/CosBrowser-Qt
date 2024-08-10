@@ -12,42 +12,39 @@
 #define mError log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).error
 #define mFatal log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).fatal
 
-
-class LoggerProxy: public QObject
-{
+class LoggerProxy : public QObject {
     Q_OBJECT
 public:
-    explicit LoggerProxy(QObject *parent = nullptr);
+    explicit LoggerProxy(QObject* parent = nullptr);
     ~LoggerProxy();
 
     const LoggerProxy& reset(const QString& file, int line, const QString& func);
 
     static LoggerProxy* instance();
 
-    void total(const QVariant& var, bool up=false) const;
-    void debug(const QVariant& var, bool up=false) const;
-    void info(const QVariant& var, bool up=false) const;
-    void warning(const QVariant& var, bool up=false) const;
-    void error(const QVariant& var, bool up=true) const;
-    void fatal(const QVariant& var, bool up=true) const;
+    void total(const QVariant& var, bool up = false) const;
+    void debug(const QVariant& var, bool up = false) const;
+    void info(const QVariant& var, bool up = false) const;
+    void warning(const QVariant& var, bool up = false) const;
+    void error(const QVariant& var, bool up = true) const;
+    void fatal(const QVariant& var, bool up = true) const;
 
     void setLevel(GLOBAL::LOG_LEVEL newLevel);
-    void setLogger(BasicLogger *newLogger);
+    void setLogger(BasicLogger* newLogger);
 
 signals:
-    void sigLog(const QString& file, int line, const QString& func, void* tid,
-                int level, const QVariant& var, bool up) const;
+    void sigLog(const QString& file, int line, const QString& func, void* tid, int level, const QVariant& var,
+                bool up) const;
 
 private:
     void doLog(GLOBAL::LOG_LEVEL level, const QVariant& var, bool up) const;
 
 private:
-    BasicLogger* m_logger = nullptr;
+    BasicLogger*      m_logger = nullptr;
     GLOBAL::LOG_LEVEL m_level;
-
-    QString m_file;
-    int m_line;
-    QString m_func;
+    QString           m_file;
+    int               m_line;
+    QString           m_func;
 };
 
-#endif // LOGGERPROXY_H
+#endif  // LOGGERPROXY_H

@@ -3,8 +3,7 @@
 
 #include "version.h"
 
-class VersionJson : public Version
-{
+class VersionJson : public Version {
 public:
     VersionJson(const QString& path);
 
@@ -14,4 +13,4 @@ private:
     QString m_path;
 };
 
-#endif // VERSIONJSON_H
+#endif  // VERSIONJSON_H

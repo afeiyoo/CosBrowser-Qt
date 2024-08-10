@@ -3,13 +3,12 @@
 
 #include <QString>
 
-
 struct LoginInfo {
     QString name;
     QString secret_id;
     QString secret_key;
     QString remark;
-    uint timestamp;
+    uint    timestamp;
 };
 
-#endif // DBMODELS_H
+#endif  // DBMODELS_H

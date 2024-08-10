@@ -7,8 +7,7 @@ namespace Ui {
 class BreadWidget;
 }
 
-class BreadWidget : public QWidget
-{
+class BreadWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -19,4 +18,4 @@ private:
     Ui::BreadWidget *ui;
 };
 
-#endif // BREADWIDGET_H
+#endif  // BREADWIDGET_H

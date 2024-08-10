@@ -3,12 +3,11 @@
 
 #include <QString>
 
-struct MyBucket
-{
+struct MyBucket {
     MyBucket();
     QString name;
     QString location;
     QString createDate;
 };
 
-#endif // CLOUDMODELS_H
+#endif  // CLOUDMODELS_H

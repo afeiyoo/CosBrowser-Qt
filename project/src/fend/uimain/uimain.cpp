@@ -1,8 +1,9 @@
 #include "uimain.h"
-#include "src/fend/uilogin/logindialog.h"
-#include "ui_uimain.h"
 
 #include <QDebug>
+
+#include "src/fend/uilogin/logindialog.h"
+#include "ui_uimain.h"
 
 UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
     ui->setupUi(this);
@@ -14,49 +15,32 @@ UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
 
 UiMain::~UiMain() {
     delete ui;
-    if (m_loginDialog)
-        delete m_loginDialog;
+    if (m_loginDialog) delete m_loginDialog;
 }
 
 void UiMain::showLoginDialog() {
     if (m_loginDialog == nullptr) {
         m_loginDialog = new LoginDialog();
-        m_loginDialog->updateLoginInfo();   // 更新缓存
+        m_loginDialog->updateLoginInfo();  // 更新缓存
         connect(m_loginDialog, &LoginDialog::accepted, this, &UiMain::show);
     }
     m_loginDialog->show();
-    this->setVisible(false); // 主界面隐藏
+    this->setVisible(false);  // 主界面隐藏
 }
 
-void UiMain::onButtonClicked(const QString &text)
-{
+void UiMain::onButtonClicked(const QString &text) {
     qDebug() << text;
-    if (text == QString("上传"))
-    {
+    if (text == QString("上传")) {
         onUpload();
-    }
-    else if (text == QString("退出登录"))
-    {
+    } else if (text == QString("退出登录")) {
         onUnLogin();
     }
 }
 
-void UiMain::onUpload()
-{
-    qDebug() << "onUpload";
-}
+void UiMain::onUpload() { qDebug() << "onUpload"; }
 
-void UiMain::onDownload()
-{
-    qDebug() << "onDownload";
-}
+void UiMain::onDownload() { qDebug() << "onDownload"; }
 
-void UiMain::onRefresh()
-{
-    qDebug() << "onRefresh";
-}
+void UiMain::onRefresh() { qDebug() << "onRefresh"; }
 
-void UiMain::onUnLogin()
-{
-    showLoginDialog();
-}
+void UiMain::onUnLogin() { showLoginDialog(); }

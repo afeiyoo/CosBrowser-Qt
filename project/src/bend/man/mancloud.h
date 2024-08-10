@@ -23,7 +23,7 @@ signals:
 
 private:
     // 由于1个模型对应多个视图，所以对该模型使用单例模式
-    QStandardItemModel* m_model = nullptr;
+    QStandardItemModel *m_model = nullptr;
 };
 
-#endif // MANCLOUD_H
+#endif  // MANCLOUD_H

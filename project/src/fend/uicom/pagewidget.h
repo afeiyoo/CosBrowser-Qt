@@ -7,8 +7,7 @@ namespace Ui {
 class PageWidget;
 }
 
-class PageWidget : public QWidget
-{
+class PageWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -19,4 +18,4 @@ private:
     Ui::PageWidget *ui;
 };
 
-#endif // PAGEWIDGET_H
+#endif  // PAGEWIDGET_H

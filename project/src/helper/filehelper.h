@@ -4,8 +4,7 @@
 #include <QString>
 #include <QVariant>
 
-class FileHelper
-{
+class FileHelper {
 public:
     FileHelper();
 
@@ -18,4 +17,4 @@ public:
     static bool mkPath(const QString &path);
 };
 
-#endif // FILEHELPER_H
+#endif  // FILEHELPER_H

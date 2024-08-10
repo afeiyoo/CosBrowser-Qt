@@ -3,9 +3,7 @@
 
 #include <QString>
 
-
-class Version
-{
+class Version {
 public:
     Version();
 
@@ -18,12 +16,11 @@ public:
     QString major() const;
 
 protected:
-    QString m_major;    // business-商用版, custom-个人版
-    QString m_env;      // dev alpha beta prod
-
-    int m_v1;
-    int m_v2;
-    int m_v3;
+    QString m_major;  // business-商用版, custom-个人版
+    QString m_env;    // dev alpha beta prod
+    int     m_v1;
+    int     m_v2;
+    int     m_v3;
 };
 
-#endif // VERSION_H
+#endif  // VERSION_H

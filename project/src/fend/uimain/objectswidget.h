@@ -7,8 +7,7 @@ namespace Ui {
 class ObjectsWidget;
 }
 
-class ObjectsWidget : public QWidget
-{
+class ObjectsWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -19,4 +18,4 @@ private:
     Ui::ObjectsWidget *ui;
 };
 
-#endif // OBJECTSWIDGET_H
+#endif  // OBJECTSWIDGET_H

@@ -25,4 +25,4 @@ private:
     DBSqlite m_db;
 };
 
-#endif // DAOLOGININFOSQLITE_H
+#endif  // DAOLOGININFOSQLITE_H

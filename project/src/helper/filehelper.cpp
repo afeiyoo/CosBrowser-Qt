@@ -1,14 +1,14 @@
 #include "filehelper.h"
+
+#include <QDir>
 #include <QFile>
 #include <QJsonDocument>
-#include <QDir>
 
 FileHelper::FileHelper() {}
 
-QString FileHelper::readAllTxt(const QString &filePath)
-{
+QString FileHelper::readAllTxt(const QString &filePath) {
     QFile file(filePath);
-    if(file.exists() && file.open(QIODevice::ReadOnly)){
+    if (file.exists() && file.open(QIODevice::ReadOnly)) {
         QByteArray data = file.readAll();
         file.close();
 
@@ -17,20 +17,20 @@ QString FileHelper::readAllTxt(const QString &filePath)
     throw "读取文件失败";
 }
 
-QVariant FileHelper::readAllJson(const QString &filePath){
-    QString data = FileHelper::readAllTxt(filePath);
-    QJsonDocument doc = QJsonDocument::fromJson(data.toLocal8Bit());
+QVariant FileHelper::readAllJson(const QString &filePath) {
+    QString       data = FileHelper::readAllTxt(filePath);
+    QJsonDocument doc  = QJsonDocument::fromJson(data.toLocal8Bit());
     return doc.toVariant();
 }
 
-QString FileHelper::joinPath(const QString &path1, const QString &path2){
-    QString path = path1 + "/" + path2;
+QString FileHelper::joinPath(const QString &path1, const QString &path2) {
+    QString     path     = path1 + "/" + path2;
     QStringList pathList = path.split(QRegExp("[/\\\\]"), QString::SkipEmptyParts);
-    path = pathList.join("/");
+    path                 = pathList.join("/");
     return QDir::cleanPath(path);
 }
 
-bool FileHelper::mkPath(const QString &path){
+bool FileHelper::mkPath(const QString &path) {
     QDir dir;
     return dir.mkpath(path);
 }

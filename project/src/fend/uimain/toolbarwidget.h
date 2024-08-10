@@ -15,7 +15,7 @@ public:
     ~ToolBarWidget();
 
 signals:
-    void buttonClicked(const QString& text);
+    void buttonClicked(const QString &text);
 
 private slots:
 
@@ -23,4 +23,4 @@ private:
     Ui::ToolBarWidget *ui;
 };
 
-#endif // TOOLBARWIDGET_H
+#endif  // TOOLBARWIDGET_H

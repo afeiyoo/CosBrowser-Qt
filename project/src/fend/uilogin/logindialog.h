@@ -5,11 +5,12 @@
 #include <QMouseEvent>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class LoginDialog; }
+namespace Ui {
+class LoginDialog;
+}
 QT_END_NAMESPACE
 
-class LoginDialog : public QDialog
-{
+class LoginDialog : public QDialog {
     Q_OBJECT
 
 public:
@@ -19,8 +20,8 @@ public:
     void updateLoginInfo();
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
 
 private slots:
@@ -30,6 +31,6 @@ private slots:
 
 private:
     Ui::LoginDialog *ui;
-    QPoint m_start;
+    QPoint           m_start;
 };
-#endif // LOGINDIALOG_H
+#endif  // LOGINDIALOG_H

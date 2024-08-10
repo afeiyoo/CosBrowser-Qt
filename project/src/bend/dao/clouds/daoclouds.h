@@ -2,14 +2,14 @@
 #define DAOCLOUDS_H
 
 #include <QList>
+
 #include "src/middle/models/cloudmodels.h"
 
-class DaoClouds
-{
+class DaoClouds {
 public:
     DaoClouds();
 
     virtual QList<MyBucket> buckets() = 0;
 };
 
-#endif // DAOCLOUDS_H
+#endif  // DAOCLOUDS_H

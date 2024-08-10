@@ -4,8 +4,7 @@
 #include "src/helper/dbsqlite.h"
 #include "src/middle/models/dbmodels.h"
 
-class DaoLoginInfo
-{
+class DaoLoginInfo {
 public:
     DaoLoginInfo();
 
@@ -24,4 +23,4 @@ public:
     virtual QList<LoginInfo> select() = 0;
 };
 
-#endif // DAOLOGININFO_H
+#endif  // DAOLOGININFO_H

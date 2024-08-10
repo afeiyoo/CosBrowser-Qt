@@ -1,17 +1,16 @@
 #ifndef DBSQLITE_H
 #define DBSQLITE_H
 
-#include <QString>
+#include <QList>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
-#include <QList>
+#include <QString>
 #include <QVariant>
 
 typedef QMap<QString, QVariant> RECORD;
 
-class DBSqlite
-{
+class DBSqlite {
 public:
     DBSqlite();
 
@@ -31,4 +30,4 @@ private:
     QSqlDatabase m_db;
 };
 
-#endif // DBSQLITE_H
+#endif  // DBSQLITE_H
