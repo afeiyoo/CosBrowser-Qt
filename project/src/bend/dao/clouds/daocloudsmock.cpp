@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QJsonArray>
+#include <QThread>
 
 #include "src/helper/filehelper.h"
 
@@ -23,4 +24,17 @@ QList<MyBucket> DaoCloudsMock::buckets() {
     }
 
     return res;
+}
+
+QList<MyBucket> DaoCloudsMock::login(const QString &secretId, const QString &secretKey) {
+    QThread::sleep(3);
+    QJsonArray arr = m_mock["users"].toArray();
+    for (int i = 0; i < arr.count(); ++i) {
+        QJsonValue v = arr[i];
+        if (secretId == v["secretId"].toString() && secretKey == v["secretKey"].toString()) {
+            return buckets();
+        }
+    }
+
+    throw QString("用户名密码错误");
 }

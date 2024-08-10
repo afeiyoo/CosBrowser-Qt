@@ -34,3 +34,7 @@ void ManCloud::setBuckets() {
 }
 
 QStandardItemModel *ManCloud::model() const { return m_model; }
+
+void ManCloud::login(QString secretId, QString secretKey) {
+    QList<MyBucket> buckets = MP->clouds()->login(secretId, secretKey);
+}

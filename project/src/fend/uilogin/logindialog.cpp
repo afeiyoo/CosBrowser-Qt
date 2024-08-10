@@ -2,8 +2,11 @@
 
 #include <QCompleter>
 #include <QMessageBox>
+#include <qjsonobject.h>
 
+#include "src/bend/gateway/gateway.h"
 #include "src/bend/man/mandb.h"
+#include "src/config/apis.h"
 #include "ui_logindialog.h"
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent), ui(new Ui::LoginDialog) {
@@ -72,21 +75,25 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
 
 void LoginDialog::on_btnLogin_clicked() {
     // 登录信息验证
-    if (ui->lineSecretId->text().trimmed() == "zhangsan" && ui->lineSecretKey->text().trimmed() == "123") {
-        accept();
-        if (ui->checkSaveSection->isChecked()) {
-            // 保存登录信息
-            MDB->saveLoginInfo(ui->lineLoginName->text(), ui->lineSecretId->text(), ui->lineSecretKey->text(),
-                               ui->lineRemark->text());
-        } else {
-            // 删除登录信息
-            MDB->removeLoginInfo(ui->lineSecretId->text());
-        }
-        updateLoginInfo();  // 更新缓存
-    } else {
-        QMessageBox::warning(this, QString::fromUtf8("登录失败"),
-                             QString::fromUtf8("请检查SecretId或SecretKey是否正确"));
-    }
+    // if (ui->lineSecretId->text().trimmed() == "zhangsan" && ui->lineSecretKey->text().trimmed() == "123") {
+    //     accept();
+    //     if (ui->checkSaveSection->isChecked()) {
+    //         // 保存登录信息
+    //         MDB->saveLoginInfo(ui->lineLoginName->text(), ui->lineSecretId->text(), ui->lineSecretKey->text(),
+    //                            ui->lineRemark->text());
+    //     } else {
+    //         // 删除登录信息
+    //         MDB->removeLoginInfo(ui->lineSecretId->text());
+    //     }
+    //     updateLoginInfo();  // 更新缓存
+    // } else {
+    //     QMessageBox::warning(this, QString::fromUtf8("登录失败"),
+    //                          QString::fromUtf8("请检查SecretId或SecretKey是否正确"));
+    // }
+    QJsonObject params;
+    params["secretId"]  = ui->lineSecretId->text().trimmed();
+    params["secretKey"] = ui->lineSecretKey->text().trimmed();
+    GW->send(API::LOGIN::NORMAL, params);
 }
 
 void LoginDialog::on_btnClose_clicked() { reject(); }

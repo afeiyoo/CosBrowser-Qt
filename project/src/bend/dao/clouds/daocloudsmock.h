@@ -9,9 +9,11 @@
 
 class DaoCloudsMock : public DaoClouds {
 public:
-    DaoCloudsMock(const QString &path);
+    DaoCloudsMock(const QString& path);
 
     QList<MyBucket> buckets() override;
+
+    QList<MyBucket> login(const QString& secretId, const QString& secretKey) override;
 
 private:
     QJsonValue m_mock;
