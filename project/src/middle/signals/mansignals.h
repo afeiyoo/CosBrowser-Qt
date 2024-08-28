@@ -3,14 +3,12 @@
 
 #include <QObject>
 
-#define MS ManSignals::instance()
-
 class ManSignals : public QObject {
     Q_OBJECT
 public:
     explicit ManSignals(QObject* parent = nullptr);
 
-    static ManSignals* instance();
+    ~ManSignals();
 
 signals:
     void loginSuccess();

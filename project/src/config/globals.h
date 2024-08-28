@@ -43,13 +43,6 @@ enum LOG_LEVEL { TOTAL = 0, DEBUG = 1, INFO = 2, WARNING = 3, ERROR = 4, FATAL =
 static const QStringList LOG_NAMES = QStringList() << "TOTAL" << "DEBUG" << "INFO"
                                                    << "WARNING" << "ERROR" << "FATAL";
 
-static bool init() {
-    FileHelper::mkPath(PATH::LOG_DIR);
-    return FileHelper::mkPath(PATH::TMP);
-}
-
-static bool OK = init();
-
 }  // namespace GLOBAL
 
 #endif  // GLOBALS_H

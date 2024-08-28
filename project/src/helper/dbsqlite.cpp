@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QSqlRecord>
 
-#include "src/config/loggerproxy.h"
+#include "src/middle/manglobal.h"
 
 DBSqlite::DBSqlite() { m_db = QSqlDatabase::addDatabase("QSQLITE"); }
 

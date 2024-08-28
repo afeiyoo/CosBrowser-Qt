@@ -4,14 +4,12 @@
 
 #include "src/bend/man/mancloud.h"
 #include "src/config/apis.h"
-#include "src/config/loggerproxy.h"
+#include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
-
-Q_GLOBAL_STATIC(GateWay, ins);
 
 GateWay::GateWay(QObject *parent) : QObject{parent} {}
 
-GateWay *GateWay::instance() { return ins(); }
+GateWay::~GateWay() { qDebug("delete GateWay "); }
 
 void GateWay::send(int api, const QJsonValue &value) {
     // 将请求转发给线程，避免前端界面卡顿，提高软件性能
@@ -20,7 +18,7 @@ void GateWay::send(int api, const QJsonValue &value) {
             this->dispatch(api, value);
         } catch (QString e) {
             mError(e);
-            emit MS->error(api, e);
+            emit MG->mSignal->error(api, e);
         }
     });
 }
@@ -39,6 +37,6 @@ void GateWay::dispatch(int api, const QJsonValue &value) {
 void GateWay::apiLogin(const QJsonValue &value) {
     QString secretId  = value["secretId"].toString();
     QString secretKey = value["secretKey"].toString();
-    MC->login(secretId, secretKey);
-    emit MS->loginSuccess();  // 发出登录成功信号
+    MG->mCloud->login(secretId, secretKey);
+    emit MG->mSignal->loginSuccess();  // 发出登录成功信号
 }

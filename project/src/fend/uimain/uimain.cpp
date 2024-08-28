@@ -2,6 +2,7 @@
 
 #include <QDebug>
 
+#include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_uimain.h"
 
@@ -11,8 +12,8 @@ UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
     ui->splitter->setStretchFactor(1, 4);
 
     // connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
-    connect(MS, &ManSignals::loginSuccess, this, &UiMain::show);
-    connect(MS, &ManSignals::unLogin, this, &UiMain::onUnLogin);
+    connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiMain::show);
+    connect(MG->mSignal, &ManSignals::unLogin, this, &UiMain::onUnLogin);
 }
 
 UiMain::~UiMain() { delete ui; }

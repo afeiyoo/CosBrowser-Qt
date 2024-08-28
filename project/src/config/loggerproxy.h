@@ -4,14 +4,6 @@
 #include "src/bend/dao/logs/basiclogger.h"
 #include "src/config/globals.h"
 
-#define log LoggerProxy::instance()
-#define mTotal log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).total
-#define mDebug log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).debug
-#define mInfo log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).info
-#define mWarning log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).warning
-#define mError log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).error
-#define mFatal log->reset(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC).fatal
-
 class LoggerProxy : public QObject {
     Q_OBJECT
 public:
@@ -19,8 +11,6 @@ public:
     ~LoggerProxy();
 
     const LoggerProxy& reset(const QString& file, int line, const QString& func);
-
-    static LoggerProxy* instance();
 
     void total(const QVariant& var, bool up = false) const;
     void debug(const QVariant& var, bool up = false) const;

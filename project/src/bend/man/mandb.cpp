@@ -2,11 +2,9 @@
 
 #include <QDateTime>
 
-Q_GLOBAL_STATIC(ManDB, ins)
-
 ManDB::ManDB(QObject *parent) : QObject{parent} {}
 
-ManDB *ManDB::instance() { return ins(); }
+ManDB::~ManDB() { qDebug("delete ManDB "); }
 
 void ManDB::init() {
     m_daoLoginInfo.connect();

@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QStandardItemModel>
 
-#define MC ManCloud::instance()
-
 class ManCloud : public QObject {
     Q_OBJECT
 public:
@@ -13,7 +11,7 @@ public:
     // 不要使用ManBuckets构造函数创建对象，直接使用instance来使用对象即可
     explicit ManCloud(QObject *parent = nullptr);
 
-    static ManCloud *instance();
+    ~ManCloud();
 
     void setBuckets();
 

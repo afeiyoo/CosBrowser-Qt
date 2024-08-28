@@ -3,18 +3,16 @@
 #include <QDebug>
 
 #include "src/bend/dao/clouds/daoclouds.h"
+#include "src/middle/manglobal.h"
 #include "src/middle/models/cloudmodels.h"
 #include "src/plugins/manplugin.h"
 
-// 创建单例
-Q_GLOBAL_STATIC(ManCloud, ins);
-
 ManCloud::ManCloud(QObject *parent) : QObject{parent} { m_model = new QStandardItemModel(this); }
 
-ManCloud *ManCloud::instance() { return ins(); }
+ManCloud::~ManCloud() { qDebug("delete ManCloud "); }
 
 void ManCloud::setBuckets() {
-    DaoClouds      *dao     = MP->clouds();
+    DaoClouds      *dao     = MG->mPlugin->clouds();
     QList<MyBucket> buckets = dao->buckets();
     m_model->setRowCount(buckets.size());
     for (int i = 0; i < buckets.size(); ++i) {
@@ -36,5 +34,5 @@ void ManCloud::setBuckets() {
 QStandardItemModel *ManCloud::model() const { return m_model; }
 
 void ManCloud::login(QString secretId, QString secretKey) {
-    QList<MyBucket> buckets = MP->clouds()->login(secretId, secretKey);
+    QList<MyBucket> buckets = MG->mPlugin->clouds()->login(secretId, secretKey);
 }

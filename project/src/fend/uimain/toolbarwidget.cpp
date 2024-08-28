@@ -2,6 +2,7 @@
 
 #include <QSignalMapper>
 
+#include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_toolbarwidget.h"
 
@@ -18,4 +19,6 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Tool
 
 ToolBarWidget::~ToolBarWidget() { delete ui; }
 
-void ToolBarWidget::on_btnQuit_clicked() { emit MS->unLogin(); }
+void ToolBarWidget::on_btnQuit_clicked() {
+    emit MG->mSignal->unLogin();  // 发送退出登录信号
+}

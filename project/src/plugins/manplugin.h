@@ -3,14 +3,8 @@
 
 #include <QObject>
 
-#include "src/config/globals.h"
-
-using namespace GLOBAL;
-
 class DaoClouds;
 class Version;
-
-#define MP ManPlugin::instance()
 
 class ManPlugin : public QObject {
     Q_OBJECT
@@ -18,8 +12,6 @@ public:
     explicit ManPlugin(QObject* parent = nullptr);
 
     ~ManPlugin();
-
-    static ManPlugin* instance();
 
     DaoClouds* clouds() const;
 
