@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-#include "src/fend/uilogin/logindialog.h"
+#include "src/middle/signals/mansignals.h"
 #include "ui_uimain.h"
 
 UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
@@ -10,23 +10,12 @@ UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 4);
 
-    connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
+    // connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
+    connect(MS, &ManSignals::loginSuccess, this, &UiMain::show);
+    connect(MS, &ManSignals::unLogin, this, &UiMain::onUnLogin);
 }
 
-UiMain::~UiMain() {
-    delete ui;
-    if (m_loginDialog) delete m_loginDialog;
-}
-
-void UiMain::showLoginDialog() {
-    if (m_loginDialog == nullptr) {
-        m_loginDialog = new LoginDialog();
-        m_loginDialog->updateLoginInfo();  // 更新缓存
-        connect(m_loginDialog, &LoginDialog::accepted, this, &UiMain::show);
-    }
-    m_loginDialog->show();
-    this->setVisible(false);  // 主界面隐藏
-}
+UiMain::~UiMain() { delete ui; }
 
 void UiMain::onButtonClicked(const QString &text) {
     qDebug() << text;
@@ -43,4 +32,4 @@ void UiMain::onDownload() { qDebug() << "onDownload"; }
 
 void UiMain::onRefresh() { qDebug() << "onRefresh"; }
 
-void UiMain::onUnLogin() { showLoginDialog(); }
+void UiMain::onUnLogin() { hide(); }

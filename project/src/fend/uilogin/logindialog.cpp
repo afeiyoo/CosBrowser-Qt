@@ -1,21 +1,25 @@
 #include "logindialog.h"
 
+#include <qjsonobject.h>
+
 #include <QCompleter>
 #include <QMessageBox>
-#include <qjsonobject.h>
 
 #include "src/bend/gateway/gateway.h"
 #include "src/bend/man/mandb.h"
 #include "src/config/apis.h"
+#include "src/middle/signals/mansignals.h"
 #include "ui_logindialog.h"
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent), ui(new Ui::LoginDialog) {
     ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint);
+    setWindowFlags(Qt::CustomizeWindowHint);  // 取消默认标题栏
 
     // QPixmap pixmap(
     //     "F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/qt.png");
     // ui->labelLogo->setPixmap(pixmap.scaled(ui->labelLogo->size()));
+
+    ui->lineSecretKey->installEventFilter(this);  // 对lineSecretKey安装事件过滤器
 
     ui->labelTitle->setProperty("style", "h3");
     ui->labelSecretId->setProperty("style", "h4");
@@ -25,7 +29,10 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent), ui(new Ui::LoginDia
     ui->btnClose->setProperty("style", "h4");
     ui->btnLogin->setProperty("style", "h4");
 
-    ui->lineSecretKey->installEventFilter(this);  // 对lineSecretKey安装事件过滤器
+    connect(MS, &ManSignals::loginSuccess, this, &LoginDialog::onLoginSucceed);
+    connect(MS, &ManSignals::unLogin, this, &LoginDialog::show);
+    connect(MS, &ManSignals::error, this, &LoginDialog::onLoginError);
+    updateLoginInfo();
 }
 
 LoginDialog::~LoginDialog() { delete ui; }
@@ -71,6 +78,7 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
             }
         }
     }
+    return QDialog::eventFilter(watched, event);
 }
 
 void LoginDialog::on_btnLogin_clicked() {
@@ -97,3 +105,21 @@ void LoginDialog::on_btnLogin_clicked() {
 }
 
 void LoginDialog::on_btnClose_clicked() { reject(); }
+
+void LoginDialog::onLoginSucceed() {
+    accept();
+    if (ui->checkSaveSection->isChecked()) {
+        // 保存登录信息
+        MDB->saveLoginInfo(ui->lineLoginName->text(), ui->lineSecretId->text(), ui->lineSecretKey->text(),
+                           ui->lineRemark->text());
+        updateLoginInfo();
+    } else {
+        // 删除登录信息
+        MDB->removeLoginInfo(ui->lineSecretId->text());
+    }
+}
+
+void LoginDialog::onLoginError(int api, const QString &msg) {
+    if (api != API::LOGIN::NORMAL) return;
+    QMessageBox::warning(this, QString("登录失败"), QString("登录失败：%1").arg(msg));
+}

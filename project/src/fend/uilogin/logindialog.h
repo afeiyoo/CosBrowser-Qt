@@ -26,8 +26,9 @@ protected:
 
 private slots:
     void on_btnLogin_clicked();
-
     void on_btnClose_clicked();
+    void onLoginSucceed();
+    void onLoginError(int api, const QString &msg);
 
 private:
     Ui::LoginDialog *ui;

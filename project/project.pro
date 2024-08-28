@@ -18,6 +18,7 @@ SOURCES += \
     src/bend/dao/dbs/daologininfo.cpp \
     src/bend/dao/dbs/daologininfosqlite.cpp \
     src/bend/dao/logs/basiclogger.cpp \
+    src/bend/dao/logs/loggerlog4qt.cpp \
     src/bend/dao/logs/loggerqdebug.cpp \
     src/bend/gateway/gateway.cpp \
     src/bend/man/mancloud.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
     src/helper/dbsqlite.cpp \
     src/helper/filehelper.cpp \
     src/middle/models/cloudmodels.cpp \
+    src/middle/signals/mansignals.cpp \
     src/plugins/manplugin.cpp
 
 HEADERS += \
@@ -46,6 +48,7 @@ HEADERS += \
     src/bend/dao/dbs/daologininfo.h \
     src/bend/dao/dbs/daologininfosqlite.h \
     src/bend/dao/logs/basiclogger.h \
+    src/bend/dao/logs/loggerlog4qt.h \
     src/bend/dao/logs/loggerqdebug.h \
     src/bend/gateway/gateway.h \
     src/bend/man/mancloud.h \
@@ -67,6 +70,7 @@ HEADERS += \
     src/helper/filehelper.h \
     src/middle/models/cloudmodels.h \
     src/middle/models/dbmodels.h \
+    src/middle/signals/mansignals.h \
     src/plugins/manplugin.h
 
 FORMS += \
@@ -85,3 +89,20 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+# 定义Log4Qt的源码根目录
+LOG4QT_ROOT_PATH = $$PWD/third/log4qt
+
+win32:CONFIG(release, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qtd
+else:unix: LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
+
+INCLUDEPATH += $$LOG4QT_ROOT_PATH/src/ \
+               $$LOG4QT_ROOT_PATH/src/log4qt \
+               $$LOG4QT_ROOT_PATH/include/ \
+               $$LOG4QT_ROOT_PATH/include/log4qt
+
+DEPENDPATH += $$LOG4QT_ROOT_PATH/src/ \
+              $$LOG4QT_ROOT_PATH/src/log4qt \
+              $$LOG4QT_ROOT_PATH/include/ \
+              $$LOG4QT_ROOT_PATH/include/log4qt

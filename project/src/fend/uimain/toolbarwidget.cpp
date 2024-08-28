@@ -2,19 +2,20 @@
 
 #include <QSignalMapper>
 
+#include "src/middle/signals/mansignals.h"
 #include "ui_toolbarwidget.h"
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ToolBarWidget) {
     ui->setupUi(this);
-    QSignalMapper       *mapper     = new QSignalMapper(this);
-    QList<QPushButton *> buttonList = findChildren<QPushButton *>();
-
-    for (auto btn : buttonList) {
-        connect(btn, SIGNAL(clicked()), mapper, SLOT(map()));
-        mapper->setMapping(btn, btn->text());
-    }
-
-    connect(mapper, SIGNAL(mapped(QString)), this, SIGNAL(buttonClicked(QString)));
+    //    QSignalMapper* mapper = new QSignalMapper(this);
+    //    QList<QPushButton*> buttonList = findChildren<QPushButton*>();
+    //    for(auto btn: buttonList){
+    //        connect(btn, SIGNAL(clicked()), mapper, SLOT(map()));
+    //        mapper->setMapping(btn, btn->text());
+    //    }
+    //    connect(mapper, SIGNAL(mapped(QString)), this, SIGNAL(buttonClicked(QString)));
 }
 
 ToolBarWidget::~ToolBarWidget() { delete ui; }
+
+void ToolBarWidget::on_btnQuit_clicked() { emit MS->unLogin(); }

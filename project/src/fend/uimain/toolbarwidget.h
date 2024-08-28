@@ -19,6 +19,8 @@ signals:
 
 private slots:
 
+    void on_btnQuit_clicked();
+
 private:
     Ui::ToolBarWidget *ui;
 };
