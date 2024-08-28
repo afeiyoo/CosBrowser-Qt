@@ -13,17 +13,9 @@ public:
 
     ~ManCloud();
 
-    void setBuckets();
-
-    QStandardItemModel *model() const;
-
     void login(QString secretId, QString secretKey);
 
 signals:
-
-private:
-    // 由于1个模型对应多个视图，所以对该模型使用单例模式
-    QStandardItemModel *m_model = nullptr;
 };
 
 #endif  // MANCLOUD_H

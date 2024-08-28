@@ -36,6 +36,7 @@ SOURCES += \
     src/helper/dbsqlite.cpp \
     src/helper/filehelper.cpp \
     src/middle/manglobal.cpp \
+    src/middle/manmodels.cpp \
     src/middle/models/cloudmodels.cpp \
     src/middle/signals/mansignals.cpp \
     src/plugins/manplugin.cpp
@@ -70,6 +71,7 @@ HEADERS += \
     src/helper/dbsqlite.h \
     src/helper/filehelper.h \
     src/middle/manglobal.h \
+    src/middle/manmodels.h \
     src/middle/models/cloudmodels.h \
     src/middle/models/dbmodels.h \
     src/middle/signals/mansignals.h \

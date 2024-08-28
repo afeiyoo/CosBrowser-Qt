@@ -2,6 +2,7 @@
 
 #include <QApplication>
 
+#include "manmodels.h"
 #include "src/bend/gateway/gateway.h"
 #include "src/bend/man/mancloud.h"
 #include "src/bend/man/mandb.h"
@@ -24,6 +25,8 @@ ManGlobal::~ManGlobal() { qDebug("delete ManGlobal "); }
 ManGlobal *ManGlobal::instance() { return ins(); }
 
 void ManGlobal::init(int argc, char *argv[]) {
+    mModels = new ManModels(this);
+
     FileHelper::mkPath(GLOBAL::PATH::TMP);
     FileHelper::mkPath(GLOBAL::PATH::LOG_DIR);
 

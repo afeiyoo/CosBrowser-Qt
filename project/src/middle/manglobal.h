@@ -23,6 +23,7 @@ class ManPlugin;
 class GateWay;
 class ManSignals;
 class LoggerProxy;
+class ManModels;
 
 class ManGlobal : public QObject {
     Q_OBJECT
@@ -43,6 +44,7 @@ public:
     ManPlugin*   mPlugin = nullptr;
     GateWay*     mGate   = nullptr;
     ManSignals*  mSignal = nullptr;
+    ManModels*   mModels = nullptr;
 
 signals:
 };
