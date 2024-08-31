@@ -8,6 +8,14 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# QtCreator用MinGw编译OK，切换成MSVC后报错如"常量中有换行符"等错误
+# 引入该变量定义后解决
+msvc {
+    QMAKE_CFLAGS += /utf-8
+    QMAKE_CXXFLAGS += /utf-8
+}
+
+
 SOURCES += \
     main.cpp \
     src/bend/dao/clouds/daoclouds.cpp \
@@ -98,18 +106,33 @@ RESOURCES += \
     resource.qrc
 
 # 定义Log4Qt的源码根目录
-LOG4QT_ROOT_PATH = $$PWD/third/log4qt
+# LOG4QT_ROOT_PATH = $$PWD/third/log4qt
 
-win32:CONFIG(release, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qtd
-else:unix: LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
+# win32:CONFIG(release, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
+# else:win32:CONFIG(debug, debug|release): LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qtd
+# else:unix: LIBS += -L$$LOG4QT_ROOT_PATH/bin/ -llog4qt
 
-INCLUDEPATH += $$LOG4QT_ROOT_PATH/src/ \
-               $$LOG4QT_ROOT_PATH/src/log4qt \
-               $$LOG4QT_ROOT_PATH/include/ \
-               $$LOG4QT_ROOT_PATH/include/log4qt
+# INCLUDEPATH += $$LOG4QT_ROOT_PATH/src/ \
+#                $$LOG4QT_ROOT_PATH/src/log4qt \
+#                $$LOG4QT_ROOT_PATH/include/ \
+#                $$LOG4QT_ROOT_PATH/include/log4qt
 
-DEPENDPATH += $$LOG4QT_ROOT_PATH/src/ \
-              $$LOG4QT_ROOT_PATH/src/log4qt \
-              $$LOG4QT_ROOT_PATH/include/ \
-              $$LOG4QT_ROOT_PATH/include/log4qt
+# DEPENDPATH += $$LOG4QT_ROOT_PATH/src/ \
+#               $$LOG4QT_ROOT_PATH/src/log4qt \
+#               $$LOG4QT_ROOT_PATH/include/ \
+#               $$LOG4QT_ROOT_PATH/include/log4qt
+
+
+# 导入COSSDK库及其依赖
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/third/cos/libs/x64/ -lcossdk
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/third/cos/libs/x64/ -lcossdkd
+else:unix: LIBS += -L$$PWD/third/cos/libs/x64/ -lcossdk
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/third/cos/third_party/lib/x64/poco/ -lPocoFoundation
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/third/cos/third_party/lib/x64/poco/ -lPocoFoundation
+else:unix: LIBS += -L$$PWD/third/cos/third_party/lib/x64/poco/ -lPocoFoundation
+
+INCLUDEPATH += $$PWD/third/cos/include \
+    $$PWD/third/cos/third_party/include
+DEPENDPATH += $$PWD/third/cos/include \
+    $$PWD/third/cos/third_party/include
