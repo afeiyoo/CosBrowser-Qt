@@ -4,6 +4,8 @@
 
 #include "src/bend/man/mancloud.h"
 #include "src/config/apis.h"
+#include "src/config/errorcode.h"
+#include "src/config/exception.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 
@@ -16,9 +18,13 @@ void GateWay::send(int api, const QJsonValue &value) {
     QtConcurrent::run([=]() {
         try {
             this->dispatch(api, value);
-        } catch (QString e) {
-            mError(e);
-            emit MG->mSignal->error(api, e);
+        } catch (BaseException e) {
+            mError(e.msg());
+            emit MG->mSignal->error(api, e.msg());
+        } catch (...) {
+            BaseException e = BaseException(EC_100000, QString("未知错误"));
+            mError(e.msg());
+            emit MG->mSignal->error(api, e.msg());
         }
     });
 }

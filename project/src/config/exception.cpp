@@ -1,5 +1,6 @@
 #include "exception.h"
 
+#include "src/config/globals.h"
 #include "src/helper/filehelper.h"
 
 BaseException::BaseException(const QString &code, const QString &msg) {
@@ -45,3 +46,12 @@ void BaseException::generateErrorCodeHFile(const QString &csvPath, const QString
     rows << "\n\n#endif // ERRORCODE_H";
     FileHelper::writeFile(rows, targetPath);
 }
+
+QString BaseException::msg() const {
+    static ErrorMap m_map = BaseException::parseErrorCode(GLOBAL::PATH::ERROR_CODE_PATH);
+    QString         m     = QString("错误(%1): %2").arg(m_code, m_map[m_code]);
+    if (m_msg != "") m += QString("\n详情: %1").arg(m_msg);
+    return m;
+}
+
+QString BaseException::code() const { return m_code; }

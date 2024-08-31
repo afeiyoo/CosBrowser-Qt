@@ -4,7 +4,10 @@
 #include <QJsonArray>
 #include <QThread>
 
+#include "src/config/errorcode.h"
+#include "src/config/exception.h"
 #include "src/helper/filehelper.h"
+#include "src/middle/manglobal.h"
 
 DaoCloudsMock::DaoCloudsMock(const QString &path) { m_mock = FileHelper::readAllJson(path).toJsonValue(); }
 
@@ -20,7 +23,7 @@ QList<MyBucket> DaoCloudsMock::buckets() {
         bucket.createDate = v["create_date"].toString();
 
         res.append(bucket);
-        qDebug() << bucket.name << bucket.location << bucket.createDate;
+        mInfo(QString("name[%1], location[%2], date[%3]").arg(bucket.name, bucket.location, bucket.createDate));
     }
 
     return res;
@@ -36,5 +39,5 @@ QList<MyBucket> DaoCloudsMock::login(const QString &secretId, const QString &sec
         }
     }
 
-    throw QString("用户名密码错误");
+    throw BaseException(EC_211000, QString("请检查您的secretId或secretKey是否正确"));
 }

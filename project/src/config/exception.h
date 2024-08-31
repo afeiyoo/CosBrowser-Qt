@@ -13,6 +13,10 @@ public:
 
     static void generateErrorCodeHFile(const QString& csvPath, const QString& targetPath);
 
+    QString msg() const;
+
+    QString code() const;
+
 private:
     QString m_code;
 
