@@ -7,5 +7,6 @@
         <file>static/testing/business.json</file>
         <file>static/testing/custom.json</file>
         <file>static/docs/errorcode.csv</file>
+        <file>static/configs/cosconfig.json</file>
     </qresource>
 </RCC>

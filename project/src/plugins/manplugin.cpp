@@ -1,5 +1,6 @@
 #include "manplugin.h"
 
+#include "src/bend/dao/clouds/daocloudscos.h"
 #include "src/bend/dao/clouds/daocloudsmock.h"
 #include "src/bend/dao/configs/versioncmd.h"
 #include "src/bend/dao/configs/versionjson.h"
@@ -29,7 +30,7 @@ void ManPlugin::installPlugins(int argc, char *argv[]) {
     MG->mLog->setLogger(new LoggerQDebug());
 
     if (m_version->major() == GLOBAL::VERSION::MAJOR_BUSINESS) {
-        m_clouds = new DaoCloudsMock(":/static/testing/business.json");
+        m_clouds = new DaoCloudsCos();
     } else {
         m_clouds = new DaoCloudsMock(":/static/testing/custom.json");
     }

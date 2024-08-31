@@ -19,6 +19,7 @@ msvc {
 SOURCES += \
     main.cpp \
     src/bend/dao/clouds/daoclouds.cpp \
+    src/bend/dao/clouds/daocloudscos.cpp \
     src/bend/dao/clouds/daocloudsmock.cpp \
     src/bend/dao/configs/version.cpp \
     src/bend/dao/configs/versioncmd.cpp \
@@ -52,6 +53,7 @@ SOURCES += \
 
 HEADERS += \
     src/bend/dao/clouds/daoclouds.h \
+    src/bend/dao/clouds/daocloudscos.h \
     src/bend/dao/clouds/daocloudsmock.h \
     src/bend/dao/configs/version.h \
     src/bend/dao/configs/versioncmd.h \
