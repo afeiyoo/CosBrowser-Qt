@@ -7,16 +7,20 @@
 #include "src/config/exception.h"
 
 using namespace qcloud_cos;
-static qcloud_cos::CosConfig config = qcloud_cos::CosConfig("./cosconfig.json");
 
-DaoCloudsCos::DaoCloudsCos() {}
+DaoCloudsCos::DaoCloudsCos() { m_config = new CosConfig("./cosconfig.json"); }
+
+DaoCloudsCos::~DaoCloudsCos() {
+    delete m_config;
+    m_config = nullptr;
+}
 
 QList<MyBucket> DaoCloudsCos::buckets() {
     QList<MyBucket> res;
 
     GetServiceReq  req;
     GetServiceResp resp;
-    CosAPI         cos    = qcloud_cos::CosAPI(config);
+    CosAPI         cos    = qcloud_cos::CosAPI(*m_config);
     CosResult      result = cos.GetService(req, &resp);
 
     if (result.IsSucc()) {
@@ -42,9 +46,9 @@ QList<MyBucket> DaoCloudsCos::buckets() {
 }
 
 QList<MyBucket> DaoCloudsCos::login(const QString &secretId, const QString &secretKey) {
-    config.SetAccessKey(secretId.toStdString());
-    config.SetSecretKey(secretKey.toStdString());
-    config.SetRegion("ap-nanjing");
+    m_config->SetAccessKey(secretId.toStdString());
+    m_config->SetSecretKey(secretKey.toStdString());
+    m_config->SetRegion("ap-nanjing");
 
     return buckets();
 }
