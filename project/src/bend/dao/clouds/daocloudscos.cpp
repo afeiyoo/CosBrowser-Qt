@@ -52,3 +52,15 @@ QList<MyBucket> DaoCloudsCos::login(const QString &secretId, const QString &secr
 
     return buckets();
 }
+
+bool DaoCloudsCos::isBucketExists(const QString &bucketName) {
+    QString location = getBucketLocation(bucketName);
+    m_config->SetRegion(location.toLocal8Bit().data());
+    CosAPI cos = CosAPI(*m_config);
+    return cos.IsBucketExist(bucketName.toStdString());
+}
+
+QString DaoCloudsCos::getBucketLocation(const QString &bucketName) {
+    CosAPI cos = CosAPI(*m_config);
+    return QString(cos.GetBucketLocation(bucketName.toStdString()).c_str());
+}

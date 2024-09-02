@@ -15,6 +15,10 @@ public:
 
     QList<MyBucket> login(const QString& secretId, const QString& secretKey) override;
 
+    bool isBucketExists(const QString& bucketName) override;
+
+    virtual QString getBucketLocation(const QString& bucketName) override;
+
 private:
     QJsonValue m_mock;
 };
