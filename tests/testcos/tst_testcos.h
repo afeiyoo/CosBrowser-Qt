@@ -18,6 +18,8 @@ private slots:
     // 调用所有测试用例之后，会调用一次该函数
     void cleanupTestCase();
     void test_buckets();
+    void test_isBucketExists();
+    void test_getBucketLocation();
 
 private:
     DaoCloudsCos m_cos;
