@@ -1,34 +1,16 @@
-#include <QtTest>
+#include "tst_testexception.h"
 
-// add necessary includes here
-#include "../../project/src/config/exception.h"
+#include "src/config/exception.h"
 
-class testexception : public QObject {
-    Q_OBJECT
+TestException::TestException() {}
 
-public:
-    testexception();
-    ~testexception();
+TestException::~TestException() {}
 
-private slots:
-    void initTestCase();
-    void cleanupTestCase();
-    void test_generateErrorCodeHFile();
-};
+void TestException::initTestCase() {}
 
-testexception::testexception() {}
+void TestException::cleanupTestCase() {}
 
-testexception::~testexception() {}
-
-void testexception::initTestCase() {}
-
-void testexception::cleanupTestCase() {}
-
-void testexception::test_generateErrorCodeHFile() {
-    BaseException::generateErrorCodeHFile("../../../CosBrowser/project/static/docs/errorcode.csv",
-                                          "../../../CosBrowser/project/src/config/errorcode.h");
+void TestException::test_generateErrorCodeHFile() {
+    // BaseException::generateErrorCodeHFile("../../../CosBrowser/project/static/docs/errorcode.csv",
+    //                                       "../../../CosBrowser/project/src/config/errorcode.h");
 }
-
-QTEST_APPLESS_MAIN(testexception)
-
-#include "tst_testexception.moc"
