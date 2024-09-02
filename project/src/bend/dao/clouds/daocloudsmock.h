@@ -19,6 +19,10 @@ public:
 
     virtual QString getBucketLocation(const QString& bucketName) override;
 
+    void putBucket(const QString& bucketName, const QString& location) override;
+
+    void deleteBucket(const QString& bucketName) override;
+
 private:
     QJsonValue m_mock;
 };

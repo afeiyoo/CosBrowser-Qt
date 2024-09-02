@@ -64,3 +64,38 @@ QString DaoCloudsCos::getBucketLocation(const QString &bucketName) {
     CosAPI cos = CosAPI(*m_config);
     return QString(cos.GetBucketLocation(bucketName.toStdString()).c_str());
 }
+
+void DaoCloudsCos::putBucket(const QString &bucketName, const QString &location) {
+    if (isBucketExists(bucketName)) return;
+
+    PutBucketReq  req(bucketName.toLocal8Bit().data());
+    PutBucketResp resp;
+
+    m_config->SetRegion(location.toStdString());
+    CosAPI    cos(*m_config);
+    CosResult result = cos.PutBucket(req, &resp);
+    if (!result.IsSucc()) {
+        throwError(EC_331100, result);
+    }
+}
+
+void DaoCloudsCos::deleteBucket(const QString &bucketName) {
+    if (!isBucketExists(bucketName)) return;
+
+    DeleteBucketReq  req(bucketName.toLocal8Bit().data());
+    DeleteBucketResp resp;
+
+    QString location = getBucketLocation(bucketName);
+    m_config->SetRegion(location.toStdString());
+    CosAPI    cos(*m_config);
+    CosResult result = cos.DeleteBucket(req, &resp);
+    if (!result.IsSucc()) {
+        throwError(EC_331300, result);
+    }
+}
+
+void DaoCloudsCos::throwError(const QString &code, qcloud_cos::CosResult &result) {
+    QString msg = QString("腾讯云错误码 【%1】：%2").arg(result.GetErrorCode().c_str(), result.GetErrorMsg().c_str());
+    qDebug() << msg;
+    throw BaseException(code, msg);
+}

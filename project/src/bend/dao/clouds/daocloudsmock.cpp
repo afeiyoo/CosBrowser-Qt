@@ -45,3 +45,7 @@ QList<MyBucket> DaoCloudsMock::login(const QString &secretId, const QString &sec
 bool DaoCloudsMock::isBucketExists(const QString &bucketName) { return false; }
 
 QString DaoCloudsMock::getBucketLocation(const QString &bucketName) { return ""; }
+
+void DaoCloudsMock::putBucket(const QString &bucketName, const QString &location) {}
+
+void DaoCloudsMock::deleteBucket(const QString &bucketName) {}
