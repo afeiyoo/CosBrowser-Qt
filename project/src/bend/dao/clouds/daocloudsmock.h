@@ -23,6 +23,8 @@ public:
 
     void deleteBucket(const QString& bucketName) override;
 
+    QList<MyObject> getObjects(const QString& bucketName, const QString& dir) override;
+
 private:
     QJsonValue m_mock;
 };

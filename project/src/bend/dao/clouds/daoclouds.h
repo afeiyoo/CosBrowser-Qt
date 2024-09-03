@@ -20,6 +20,8 @@ public:
     virtual void putBucket(const QString& bucketName, const QString& location) = 0;
 
     virtual void deleteBucket(const QString& bucketName) = 0;
+
+    virtual QList<MyObject> getObjects(const QString& bucketName, const QString& dir) = 0;
 };
 
 #endif  // DAOCLOUDS_H

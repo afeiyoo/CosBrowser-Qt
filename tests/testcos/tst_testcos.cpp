@@ -7,7 +7,7 @@ TestCos::~TestCos() {}
 
 void TestCos::initTestCase() {
     // 登录
-    m_cos.login("xxxxx", "xxxxx");
+    m_cos.login(m_secretId, m_secretKey);
 }
 
 void TestCos::cleanupTestCase() {}
@@ -19,12 +19,12 @@ void TestCos::test_buckets() {
 }
 
 void TestCos::test_isBucketExists() {
-    bool exists = m_cos.isBucketExists("qos-1303210295");
+    bool exists = m_cos.isBucketExists(m_bucketName);
     QVERIFY(exists);
 }
 
 void TestCos::test_getBucketLocation() {
-    QString location = m_cos.getBucketLocation("qos-1303210295");
+    QString location = m_cos.getBucketLocation(m_bucketName);
     QCOMPARE(location, "ap-nanjing");
 }
 
@@ -39,9 +39,15 @@ void TestCos::test_putBucket() {
 }
 
 void TestCos::test_deleteBucket() {
+    QSKIP("Skip test_deleteBucket");
     QString bucketName = "test-1303210295";
     m_cos.deleteBucket(bucketName);
 
     bool notExists = m_cos.isBucketExists(bucketName);
     QVERIFY(!notExists);
+}
+
+void TestCos::test_getObjects() {
+    QList<MyObject> objList = m_cos.getObjects(m_bucketName, "");
+    QCOMPARE(objList.size(), 3);
 }

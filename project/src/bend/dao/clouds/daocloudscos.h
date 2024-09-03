@@ -6,6 +6,7 @@
 namespace qcloud_cos {
 class CosResult;
 class CosConfig;
+class GetBucketResp;
 }  // namespace qcloud_cos
 
 class DaoCloudsCos : public DaoClouds {
@@ -26,8 +27,14 @@ public:
 
     void deleteBucket(const QString& bucketName) override;
 
+    QList<MyObject> getObjects(const QString& bucketName, const QString& dir) override;
+
 private:
     void throwError(const QString& code, qcloud_cos::CosResult& result);
+
+    QList<MyObject> getDirList(qcloud_cos::GetBucketResp& resp, const QString& dir);
+
+    QList<MyObject> getFileList(qcloud_cos::GetBucketResp& resp, const QString& dir);
 
 private:
     qcloud_cos::CosConfig* m_config = nullptr;

@@ -49,3 +49,5 @@ QString DaoCloudsMock::getBucketLocation(const QString &bucketName) { return "";
 void DaoCloudsMock::putBucket(const QString &bucketName, const QString &location) {}
 
 void DaoCloudsMock::deleteBucket(const QString &bucketName) {}
+
+QList<MyObject> DaoCloudsMock::getObjects(const QString &bucketName, const QString &dir) { return QList<MyObject>(); }

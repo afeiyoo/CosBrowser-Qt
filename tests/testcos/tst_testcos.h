@@ -22,9 +22,13 @@ private slots:
     void test_getBucketLocation();
     void test_putBucket();
     void test_deleteBucket();
+    void test_getObjects();
 
 private:
     DaoCloudsCos m_cos;
+    QString      m_secretId   = "xxxx";            // 自己的id
+    QString      m_secretKey  = "xxxx";            // 自己的Key
+    QString      m_bucketName = "qos-1303210295";  // 自己的测试桶名称
 };
 
 #endif  // TESTCOS_H
