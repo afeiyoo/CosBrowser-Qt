@@ -20,6 +20,8 @@ private slots:
     void test_buckets();
     void test_isBucketExists();
     void test_getBucketLocation();
+    void test_putBucket();
+    void test_deleteBucket();
 
 private:
     DaoCloudsCos m_cos;

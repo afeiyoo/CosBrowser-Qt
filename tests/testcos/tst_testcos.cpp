@@ -27,3 +27,21 @@ void TestCos::test_getBucketLocation() {
     QString location = m_cos.getBucketLocation("qos-1303210295");
     QCOMPARE(location, "ap-nanjing");
 }
+
+void TestCos::test_putBucket() {
+    // 当创建存储桶时，必须以appid结尾
+    QSKIP("Skip test_putBucket");
+    QString bucketName = "test3-1303210295";
+    m_cos.putBucket(bucketName, "ap-nanjing");
+
+    bool exists = m_cos.isBucketExists(bucketName);
+    QVERIFY(exists);
+}
+
+void TestCos::test_deleteBucket() {
+    QString bucketName = "test-1303210295";
+    m_cos.deleteBucket(bucketName);
+
+    bool notExists = m_cos.isBucketExists(bucketName);
+    QVERIFY(!notExists);
+}
