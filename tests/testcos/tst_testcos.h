@@ -23,6 +23,7 @@ private slots:
     void test_putBucket();
     void test_deleteBucket();
     void test_getObjects();
+    void test_getObjectError();
 
 private:
     DaoCloudsCos m_cos;

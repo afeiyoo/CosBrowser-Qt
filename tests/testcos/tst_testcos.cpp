@@ -1,6 +1,8 @@
 
 #include "tst_testcos.h"
 
+#include "src/config/exception.h"
+
 TestCos::TestCos() {}
 
 TestCos::~TestCos() {}
@@ -50,4 +52,9 @@ void TestCos::test_deleteBucket() {
 void TestCos::test_getObjects() {
     QList<MyObject> objList = m_cos.getObjects(m_bucketName, "");
     QCOMPARE(objList.size(), 3);
+}
+
+void TestCos::test_getObjectError() {
+    // QVERIFY_EXCEPTION_THROWN 捕获预期异常
+    QVERIFY_EXCEPTION_THROWN(m_cos.getObjects("file", ""), BaseException);
 }
