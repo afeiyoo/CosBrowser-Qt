@@ -35,6 +35,7 @@ public:
     void getObject(const QString& bucketName, const QString& key, const QString& localPath,
                    const TransProgressCallback& callback) override;
 
+    bool isObjectExists(const QString &bucketName, const QString &key);
 private:
     void throwError(const QString& code, qcloud_cos::CosResult& result);
 

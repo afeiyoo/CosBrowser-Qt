@@ -219,3 +219,10 @@ MyBucket DaoCloudsCos::getBucketByName(const QString &bucketName) {
     }
     return MyBucket();
 }
+
+bool DaoCloudsCos::isObjectExists(const QString &bucketName, const QString &key) {
+    QString location = getBucketLocation(bucketName);
+    m_config->SetRegion(location.toStdString());
+    CosAPI cos(*m_config);
+    return cos.IsObjectExist(bucketName.toStdString(), key.toLocal8Bit().data());
+}

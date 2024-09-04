@@ -2,6 +2,7 @@
 #include "tst_testcos.h"
 
 #include "src/config/exception.h"
+#include "src/helper/filehelper.h"
 
 TestCos::TestCos() {}
 
@@ -10,9 +11,13 @@ TestCos::~TestCos() {}
 void TestCos::initTestCase() {
     // 登录
     m_cos.login(m_secretId, m_secretKey);
+    FileHelper::writeFile(QStringList() << "abc" << "def", m_uploadLocalPath);
 }
 
-void TestCos::cleanupTestCase() {}
+void TestCos::cleanupTestCase() {
+    QFile::remove(m_uploadLocalPath);
+    QFile::remove(m_downloadLocalPath);
+}
 
 void TestCos::test_buckets() {
     QList<MyBucket> bs = m_cos.buckets();
@@ -76,4 +81,16 @@ void TestCos::test_getObjects2() {
 void TestCos::test_getObjectError() {
     // QVERIFY_EXCEPTION_THROWN 捕获预期异常
     QVERIFY_EXCEPTION_THROWN(m_cos.getObjects("file", ""), BaseException);
+}
+
+void TestCos::test_putObject() {
+    QSKIP("SKIP test putObject");
+
+    m_cos.putObject(m_bucketName, m_updownKey, m_uploadLocalPath, nullptr);
+    QVERIFY(m_cos.isObjectExists(m_bucketName, m_updownKey));
+}
+
+void TestCos::test_getObject() {
+    m_cos.getObject(m_bucketName, m_updownKey, m_downloadLocalPath, nullptr);
+    QVERIFY(QFile::exists(m_downloadLocalPath));
 }
