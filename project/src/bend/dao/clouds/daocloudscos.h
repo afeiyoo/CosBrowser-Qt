@@ -29,12 +29,20 @@ public:
 
     QList<MyObject> getObjects(const QString& bucketName, const QString& dir) override;
 
+    void putObject(const QString& bucketName, const QString& key, const QString& localPath,
+                   const TransProgressCallback& callback) override;
+
+    void getObject(const QString& bucketName, const QString& key, const QString& localPath,
+                   const TransProgressCallback& callback) override;
+
 private:
     void throwError(const QString& code, qcloud_cos::CosResult& result);
 
     QList<MyObject> getDirList(qcloud_cos::GetBucketResp& resp, const QString& dir);
 
     QList<MyObject> getFileList(qcloud_cos::GetBucketResp& resp, const QString& dir);
+
+    MyBucket getBucketByName(const QString& bucketName);
 
 private:
     qcloud_cos::CosConfig* m_config = nullptr;

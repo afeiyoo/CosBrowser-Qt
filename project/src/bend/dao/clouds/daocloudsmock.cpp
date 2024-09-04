@@ -51,3 +51,9 @@ void DaoCloudsMock::putBucket(const QString &bucketName, const QString &location
 void DaoCloudsMock::deleteBucket(const QString &bucketName) {}
 
 QList<MyObject> DaoCloudsMock::getObjects(const QString &bucketName, const QString &dir) { return QList<MyObject>(); }
+
+void DaoCloudsMock::putObject(const QString &bucketName, const QString &key, const QString &localPath,
+                              const TransProgressCallback &callback) {}
+
+void DaoCloudsMock::getObject(const QString &bucketName, const QString &key, const QString &localPath,
+                              const TransProgressCallback &callback) {}
