@@ -4,18 +4,35 @@
 #include <QObject>
 #include <QStandardItemModel>
 
+#include "src/middle/models/cloudmodels.h"
+
 class ManCloud : public QObject {
     Q_OBJECT
 public:
     // 对于使用Qt宏创建单例
     // 不要使用ManBuckets构造函数创建对象，直接使用instance来使用对象即可
-    explicit ManCloud(QObject *parent = nullptr);
+    explicit ManCloud(QObject* parent = nullptr);
 
     ~ManCloud();
 
     void login(QString secretId, QString secretKey);
 
-signals:
+    // 桶操作接口
+    void getBuckets();
+
+    void putBucket(const QString& bucketName, const QString& location);
+
+    void deleteBucket(const QString& bucketName);
+
+    // 对象操作接口
+    void getObjects(const QString& bucketName, const QString& dir = "");
+
+    void getObject(const QString& jobId, const QString& bucketName, const QString& key, const QString& localPath);
+
+    void putObjcet(const QString& jobId, const QString& bucketName, const QString& key, const QString& localPath);
+
+private:
+    void bucketsAlready(const QList<MyBucket>& buckets);
 };
 
 #endif  // MANCLOUD_H
