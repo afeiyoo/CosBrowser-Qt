@@ -29,6 +29,7 @@ LoginDialog::LoginDialog(QWidget *parent) : QosDialog(parent), ui(new Ui::LoginD
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &LoginDialog::onLoginSucceed);
     connect(MG->mSignal, &ManSignals::unLogin, this, &LoginDialog::show);
     connect(MG->mSignal, &ManSignals::error, this, &LoginDialog::onLoginError);
+    connect(ui->btnLogin, &QPushButton::clicked, this, &LoginDialog::onBtnLoginClicked);
     updateLoginInfo();
 }
 
@@ -63,7 +64,7 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
     return QDialog::eventFilter(watched, event);
 }
 
-void LoginDialog::on_btnLogin_clicked() {
+void LoginDialog::onBtnLoginClicked() {
     // 登录信息验证
     // if (ui->lineSecretId->text().trimmed() == "zhangsan" && ui->lineSecretKey->text().trimmed() == "123") {
     //     accept();
