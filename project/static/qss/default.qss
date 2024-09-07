@@ -41,16 +41,6 @@ QLineEdit:hover{
 	border-color: #1296db;
 }
 
-/*通用标签设置*/
-QLabel{
-	background-color: transparent;
-}
-QLabel#labelLogo{
-	min-width: 32px;
-	min-height: 32px;
-        border-image: url(":/static/imgs/qt.png");
-}
-
 /*通用按钮设置*/
 QPushButton{
 	background: transparent;
@@ -67,13 +57,8 @@ QPushButton:hover{
 QPushButton#btnLogin{
 	background: #1296db;
 	color:white;
-    font: bold 12pt;
+        font: bold 12pt;
 }
-
-QPushButton#btnClose:hover{
-	color:red;
-}
-
 
 
 

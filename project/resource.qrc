@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>static/imgs/qt.png</file>
         <file>static/qss/default.qss</file>
         <file>static/sql/login_info.sql</file>
         <file>static/versions/config_default.json</file>
