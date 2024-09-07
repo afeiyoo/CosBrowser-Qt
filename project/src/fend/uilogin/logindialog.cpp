@@ -3,6 +3,7 @@
 #include <qjsonobject.h>
 
 #include <QCompleter>
+#include <QKeyEvent>
 #include <QMessageBox>
 
 #include "src/bend/gateway/gateway.h"
@@ -12,23 +13,18 @@
 #include "src/middle/signals/mansignals.h"
 #include "ui_logindialog.h"
 
-LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent), ui(new Ui::LoginDialog) {
-    ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint);  // 取消默认标题栏
+LoginDialog::LoginDialog(QWidget *parent) : QosDialog(parent), ui(new Ui::LoginDialog) {
+    ui->setupUi(body());
 
-    // QPixmap pixmap(
-    //     "F:/300_Study/303_Qt/01_CosBrowser/Code/COSBrowser/project/qt.png");
-    // ui->labelLogo->setPixmap(pixmap.scaled(ui->labelLogo->size()));
+    setTitle(QString("登录"));
 
     ui->lineSecretKey->installEventFilter(this);  // 对lineSecretKey安装事件过滤器
 
-    ui->labelTitle->setProperty("style", "h3");
-    ui->labelSecretId->setProperty("style", "h4");
-    ui->labelLoginName->setProperty("style", "h4");
-    ui->labelSecretKey->setProperty("style", "h4");
-    ui->labelRemark->setProperty("style", "h4");
-    ui->btnClose->setProperty("style", "h4");
-    ui->btnLogin->setProperty("style", "h4");
+    ui->labelSecretId->setProperty("style", "h5");
+    ui->labelLoginName->setProperty("style", "h5");
+    ui->labelSecretKey->setProperty("style", "h5");
+    ui->labelRemark->setProperty("style", "h5");
+    ui->btnLogin->setProperty("style", "h5");
 
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &LoginDialog::onLoginSucceed);
     connect(MG->mSignal, &ManSignals::unLogin, this, &LoginDialog::show);
@@ -51,21 +47,6 @@ void LoginDialog::updateLoginInfo() {
                 ui->lineRemark->setText(info.remark);
                 ui->checkSaveSection->setChecked(true);
             });
-}
-
-void LoginDialog::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        m_start = event->pos();  // 相对于父控件坐标原点的位置
-    }
-    QDialog::mousePressEvent(event);
-}
-
-void LoginDialog::mouseMoveEvent(QMouseEvent *event) {
-    if (event->buttons() & Qt::LeftButton) {
-        QPoint targetPos = event->pos() - m_start + pos();
-        this->move(targetPos);
-    }
-    QDialog::mouseMoveEvent(event);
 }
 
 bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
@@ -104,8 +85,6 @@ void LoginDialog::on_btnLogin_clicked() {
     params["secretKey"] = ui->lineSecretKey->text().trimmed();
     MG->mGate->send(API::LOGIN::NORMAL, params);
 }
-
-void LoginDialog::on_btnClose_clicked() { reject(); }
 
 void LoginDialog::onLoginSucceed() {
     accept();

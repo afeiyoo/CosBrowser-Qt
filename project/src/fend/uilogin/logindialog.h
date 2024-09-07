@@ -1,8 +1,7 @@
 ﻿#ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
 
-#include <QDialog>
-#include <QMouseEvent>
+#include "src/fend/uicom/qosdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -10,7 +9,7 @@ class LoginDialog;
 }
 QT_END_NAMESPACE
 
-class LoginDialog : public QDialog {
+class LoginDialog : public QosDialog {
     Q_OBJECT
 
 public:
@@ -20,13 +19,10 @@ public:
     void updateLoginInfo();
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
 
 private slots:
     void on_btnLogin_clicked();
-    void on_btnClose_clicked();
     void onLoginSucceed();
     void onLoginError(int api, const QString &msg);
 
