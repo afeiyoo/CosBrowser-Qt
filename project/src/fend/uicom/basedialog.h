@@ -81,6 +81,6 @@ protected:
 
 private:
     QPoint m_start;
-    int    m_sz = 20;
+    int    m_sz = 20;  // 为了保证后续添加的自定义按钮大小也正常
 };
 #endif  // BASEDIALOG_H

@@ -1,13 +1,13 @@
 #ifndef UIMAIN_H
 #define UIMAIN_H
 
-#include <QWidget>
+#include "src/fend/uicom/qosdialog.h"
 
 namespace Ui {
 class UiMain;
 }
 
-class UiMain : public QWidget {
+class UiMain : public QosDialog {
     Q_OBJECT
 
 public:

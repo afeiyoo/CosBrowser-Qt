@@ -2,14 +2,21 @@
 
 #include <QDebug>
 
+#include "src/config/globals.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_uimain.h"
 
-UiMain::UiMain(QWidget *parent) : QWidget(parent), ui(new Ui::UiMain) {
-    ui->setupUi(this);
+UiMain::UiMain(QWidget *parent) : QosDialog(parent), ui(new Ui::UiMain) {
+    ui->setupUi(body());
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 4);
+
+    addMinButton(GLOBAL::PATH::MIN_PATH, GLOBAL::PATH::MIN_HOVER_PATH);
+    addMaxButton(GLOBAL::PATH::MAX_PATH, GLOBAL::PATH::MAX_HOVER_PATH, GLOBAL::PATH::NORMAL_PATH,
+                 GLOBAL::PATH::NORMAL_HOVER_PATH);
+    setTitle(QString("Qos Browser"));
+    resize(1080, 640);
 
     // connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiMain::show);
