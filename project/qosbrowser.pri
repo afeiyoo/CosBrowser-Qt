@@ -48,7 +48,8 @@ SOURCES += \
     $$PWD/src/middle/manmodels.cpp \
     $$PWD/src/middle/models/cloudmodels.cpp \
     $$PWD/src/middle/signals/mansignals.cpp \
-    $$PWD/src/plugins/manplugin.cpp
+    $$PWD/src/plugins/manplugin.cpp \
+    $$PWD/src/fend/uicom/qosdialog.cpp
 
 HEADERS += \
     $$PWD/src/bend/dao/clouds/daoclouds.h \
@@ -88,7 +89,9 @@ HEADERS += \
     $$PWD/src/middle/models/cloudmodels.h \
     $$PWD/src/middle/models/dbmodels.h \
     $$PWD/src/middle/signals/mansignals.h \
-    $$PWD/src/plugins/manplugin.h
+    $$PWD/src/plugins/manplugin.h \
+    $$PWD/src/fend/uicom/qosdialog.h
+
 
 FORMS += \
     $$PWD/src/fend/uicom/basedialog.ui \
@@ -98,7 +101,8 @@ FORMS += \
     $$PWD/src/fend/uimain/bucketswidget.ui \
     $$PWD/src/fend/uimain/objectswidget.ui \
     $$PWD/src/fend/uimain/toolbarwidget.ui \
-    $$PWD/src/fend/uimain/uimain.ui
+    $$PWD/src/fend/uimain/uimain.ui \
+    $$PWD/src/fend/uicom/qosdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
