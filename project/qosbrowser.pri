@@ -35,6 +35,7 @@ SOURCES += \
     $$PWD/src/fend/uicom/mylineedit.cpp \
     $$PWD/src/fend/uicom/uibasedialog.cpp \
     $$PWD/src/fend/uicom/uibreadwidget.cpp \
+    $$PWD/src/fend/uicom/uicomboline.cpp \
     $$PWD/src/fend/uicom/uipagewidget.cpp \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     $$PWD/src/fend/uicom/mylineedit.h \
     $$PWD/src/fend/uicom/uibasedialog.h \
     $$PWD/src/fend/uicom/uibreadwidget.h \
+    $$PWD/src/fend/uicom/uicomboline.h \
     $$PWD/src/fend/uicom/uipagewidget.h \
     $$PWD/src/fend/uicom/uiqosdialog.h \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
