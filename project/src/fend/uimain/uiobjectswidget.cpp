@@ -1,15 +1,15 @@
-#include "objectswidget.h"
+#include "uiobjectswidget.h"
 
-#include "src/fend/uidelegate/bucketdelegate.h"
+#include "src/fend/uidelegate/uibucketdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
-#include "ui_objectswidget.h"
+#include "ui_uiobjectswidget.h"
 
-ObjectsWidget::ObjectsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ObjectsWidget) {
+UiObjectsWidget::UiObjectsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiObjectsWidget) {
     ui->setupUi(this);
     ui->tableView->setModel(MG->mModels->model());
     // 为第1列（从0开始）指定代理
-    ui->tableView->setItemDelegateForColumn(1, new BucketDelegate());
+    ui->tableView->setItemDelegateForColumn(1, new UiBucketDelegate());
 
     // 设置标题内容
     QStandardItemModel *model = MG->mModels->model();
@@ -37,4 +37,4 @@ ObjectsWidget::ObjectsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Obje
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
-ObjectsWidget::~ObjectsWidget() { delete ui; }
+UiObjectsWidget::~UiObjectsWidget() { delete ui; }

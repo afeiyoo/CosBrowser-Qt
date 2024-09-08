@@ -1,12 +1,12 @@
-#include "toolbarwidget.h"
+#include "uitoolbarwidget.h"
 
 #include <QSignalMapper>
 
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
-#include "ui_toolbarwidget.h"
+#include "ui_uitoolbarwidget.h"
 
-ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ToolBarWidget) {
+UiToolBarWidget::UiToolBarWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiToolBarWidget) {
     ui->setupUi(this);
     //    QSignalMapper* mapper = new QSignalMapper(this);
     //    QList<QPushButton*> buttonList = findChildren<QPushButton*>();
@@ -17,8 +17,8 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Tool
     //    connect(mapper, SIGNAL(mapped(QString)), this, SIGNAL(buttonClicked(QString)));
 }
 
-ToolBarWidget::~ToolBarWidget() { delete ui; }
+UiToolBarWidget::~UiToolBarWidget() { delete ui; }
 
-void ToolBarWidget::on_btnQuit_clicked() {
+void UiToolBarWidget::on_btnQuit_clicked() {
     emit MG->mSignal->unLogin();  // 发送退出登录信号
 }

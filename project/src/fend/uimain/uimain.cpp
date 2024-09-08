@@ -7,7 +7,7 @@
 #include "src/middle/signals/mansignals.h"
 #include "ui_uimain.h"
 
-UiMain::UiMain(QWidget *parent) : QosDialog(parent), ui(new Ui::UiMain) {
+UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
     ui->setupUi(body());
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 4);

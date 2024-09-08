@@ -1,20 +1,20 @@
-#ifndef BASEDIALOG_H
-#define BASEDIALOG_H
+#ifndef UIBASEDIALOG_H
+#define UIBASEDIALOG_H
 
 #include <QDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class BaseDialog;
+class UiBaseDialog;
 }
 QT_END_NAMESPACE
 
-class BaseDialog : public QDialog {
+class UiBaseDialog : public QDialog {
     Q_OBJECT
 
 public:
-    BaseDialog(QWidget* parent = nullptr);
-    ~BaseDialog();
+    UiBaseDialog(QWidget* parent = nullptr);
+    ~UiBaseDialog();
 
     /**
      * @brief 设置标题
@@ -77,10 +77,10 @@ private:
     void addWidget(QWidget* w);
 
 protected:
-    Ui::BaseDialog* m_ui;  // 设置为protected，因此子类也可以对窗口进行设置
+    Ui::UiBaseDialog* m_ui;  // 设置为protected，因此子类也可以对窗口进行设置
 
 private:
     QPoint m_start;
     int    m_sz = 20;  // 为了保证后续添加的自定义按钮大小也正常
 };
-#endif  // BASEDIALOG_H
+#endif  // UIBASEDIALOG_H

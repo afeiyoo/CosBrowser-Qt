@@ -32,24 +32,24 @@ SOURCES += \
     $$PWD/src/bend/man/mandb.cpp \
     $$PWD/src/config/exception.cpp \
     $$PWD/src/config/loggerproxy.cpp \
-    $$PWD/src/fend/uicom/basedialog.cpp \
-    $$PWD/src/fend/uicom/breadwidget.cpp \
     $$PWD/src/fend/uicom/mylineedit.cpp \
-    $$PWD/src/fend/uicom/pagewidget.cpp \
-    $$PWD/src/fend/uidelegate/bucketdelegate.cpp \
-    $$PWD/src/fend/uilogin/logindialog.cpp \
-    $$PWD/src/fend/uimain/bucketswidget.cpp \
-    $$PWD/src/fend/uimain/objectswidget.cpp \
-    $$PWD/src/fend/uimain/toolbarwidget.cpp \
+    $$PWD/src/fend/uicom/uibasedialog.cpp \
+    $$PWD/src/fend/uicom/uibreadwidget.cpp \
+    $$PWD/src/fend/uicom/uipagewidget.cpp \
+    $$PWD/src/fend/uicom/uiqosdialog.cpp \
+    $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
+    $$PWD/src/fend/uilogin/uilogindialog.cpp \
+    $$PWD/src/fend/uimain/uibucketswidget.cpp \
     $$PWD/src/fend/uimain/uimain.cpp \
+    $$PWD/src/fend/uimain/uiobjectswidget.cpp \
+    $$PWD/src/fend/uimain/uitoolbarwidget.cpp \
     $$PWD/src/helper/dbsqlite.cpp \
     $$PWD/src/helper/filehelper.cpp \
     $$PWD/src/middle/manglobal.cpp \
     $$PWD/src/middle/manmodels.cpp \
     $$PWD/src/middle/models/cloudmodels.cpp \
     $$PWD/src/middle/signals/mansignals.cpp \
-    $$PWD/src/plugins/manplugin.cpp \
-    $$PWD/src/fend/uicom/qosdialog.cpp
+    $$PWD/src/plugins/manplugin.cpp
 
 HEADERS += \
     $$PWD/src/bend/dao/clouds/daoclouds.h \
@@ -72,16 +72,17 @@ HEADERS += \
     $$PWD/src/config/exception.h \
     $$PWD/src/config/globals.h \
     $$PWD/src/config/loggerproxy.h \
-    $$PWD/src/fend/uicom/basedialog.h \
-    $$PWD/src/fend/uicom/breadwidget.h \
     $$PWD/src/fend/uicom/mylineedit.h \
-    $$PWD/src/fend/uicom/pagewidget.h \
-    $$PWD/src/fend/uidelegate/bucketdelegate.h \
-    $$PWD/src/fend/uilogin/logindialog.h \
-    $$PWD/src/fend/uimain/bucketswidget.h \
-    $$PWD/src/fend/uimain/objectswidget.h \
-    $$PWD/src/fend/uimain/toolbarwidget.h \
+    $$PWD/src/fend/uicom/uibasedialog.h \
+    $$PWD/src/fend/uicom/uibreadwidget.h \
+    $$PWD/src/fend/uicom/uipagewidget.h \
+    $$PWD/src/fend/uicom/uiqosdialog.h \
+    $$PWD/src/fend/uidelegate/uibucketdelegate.h \
+    $$PWD/src/fend/uilogin/uilogindialog.h \
+    $$PWD/src/fend/uimain/uibucketswidget.h \
     $$PWD/src/fend/uimain/uimain.h \
+    $$PWD/src/fend/uimain/uiobjectswidget.h \
+    $$PWD/src/fend/uimain/uitoolbarwidget.h \
     $$PWD/src/helper/dbsqlite.h \
     $$PWD/src/helper/filehelper.h \
     $$PWD/src/middle/manglobal.h \
@@ -89,20 +90,19 @@ HEADERS += \
     $$PWD/src/middle/models/cloudmodels.h \
     $$PWD/src/middle/models/dbmodels.h \
     $$PWD/src/middle/signals/mansignals.h \
-    $$PWD/src/plugins/manplugin.h \
-    $$PWD/src/fend/uicom/qosdialog.h
+    $$PWD/src/plugins/manplugin.h
 
 
 FORMS += \
-    $$PWD/src/fend/uicom/basedialog.ui \
-    $$PWD/src/fend/uicom/breadwidget.ui \
-    $$PWD/src/fend/uicom/pagewidget.ui \
-    $$PWD/src/fend/uilogin/logindialog.ui \
-    $$PWD/src/fend/uimain/bucketswidget.ui \
-    $$PWD/src/fend/uimain/objectswidget.ui \
-    $$PWD/src/fend/uimain/toolbarwidget.ui \
+    $$PWD/src/fend/uicom/uibasedialog.ui \
+    $$PWD/src/fend/uicom/uibreadwidget.ui \
+    $$PWD/src/fend/uicom/uipagewidget.ui \
+    $$PWD/src/fend/uicom/uiqosdialog.ui \
+    $$PWD/src/fend/uilogin/uilogindialog.ui \
+    $$PWD/src/fend/uimain/uibucketswidget.ui \
     $$PWD/src/fend/uimain/uimain.ui \
-    $$PWD/src/fend/uicom/qosdialog.ui
+    $$PWD/src/fend/uimain/uiobjectswidget.ui \
+    $$PWD/src/fend/uimain/uitoolbarwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

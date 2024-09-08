@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BucketsWidget</class>
- <widget class="QWidget" name="BucketsWidget">
+ <class>UiBucketsWidget</class>
+ <widget class="QWidget" name="UiBucketsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

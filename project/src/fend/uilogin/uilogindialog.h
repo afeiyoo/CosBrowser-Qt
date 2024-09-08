@@ -1,20 +1,20 @@
-﻿#ifndef LOGINDIALOG_H
-#define LOGINDIALOG_H
+#ifndef UILOGINDIALOG_H
+#define UILOGINDIALOG_H
 
-#include "src/fend/uicom/qosdialog.h"
+#include "src/fend/uicom/uiqosdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class LoginDialog;
+class UiLoginDialog;
 }
 QT_END_NAMESPACE
 
-class LoginDialog : public QosDialog {
+class UiLoginDialog : public UiQosDialog {
     Q_OBJECT
 
 public:
-    LoginDialog(QWidget *parent = nullptr);
-    ~LoginDialog();
+    UiLoginDialog(QWidget *parent = nullptr);
+    ~UiLoginDialog();
 
     void updateLoginInfo();
 
@@ -27,7 +27,7 @@ private slots:
     void onLoginError(int api, const QString &msg);
 
 private:
-    Ui::LoginDialog *ui;
-    QPoint           m_start;
+    Ui::UiLoginDialog *ui;
+    QPoint             m_start;
 };
-#endif  // LOGINDIALOG_H
+#endif  // UILOGINDIALOG_H

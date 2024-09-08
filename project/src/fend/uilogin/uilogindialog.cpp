@@ -1,4 +1,4 @@
-#include "logindialog.h"
+#include "uilogindialog.h"
 
 #include <qjsonobject.h>
 
@@ -11,9 +11,9 @@
 #include "src/config/apis.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
-#include "ui_logindialog.h"
+#include "ui_uilogindialog.h"
 
-LoginDialog::LoginDialog(QWidget *parent) : QosDialog(parent), ui(new Ui::LoginDialog) {
+UiLoginDialog::UiLoginDialog(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiLoginDialog) {
     ui->setupUi(body());
 
     setTitle(QString("登录"));
@@ -26,16 +26,16 @@ LoginDialog::LoginDialog(QWidget *parent) : QosDialog(parent), ui(new Ui::LoginD
     ui->labelRemark->setProperty("style", "h5");
     ui->btnLogin->setProperty("style", "h5");
 
-    connect(MG->mSignal, &ManSignals::loginSuccess, this, &LoginDialog::onLoginSucceed);
-    connect(MG->mSignal, &ManSignals::unLogin, this, &LoginDialog::show);
-    connect(MG->mSignal, &ManSignals::error, this, &LoginDialog::onLoginError);
-    connect(ui->btnLogin, &QPushButton::clicked, this, &LoginDialog::onBtnLoginClicked);
+    connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiLoginDialog::onLoginSucceed);
+    connect(MG->mSignal, &ManSignals::unLogin, this, &UiLoginDialog::show);
+    connect(MG->mSignal, &ManSignals::error, this, &UiLoginDialog::onLoginError);
+    connect(ui->btnLogin, &QPushButton::clicked, this, &UiLoginDialog::onBtnLoginClicked);
     updateLoginInfo();
 }
 
-LoginDialog::~LoginDialog() { delete ui; }
+UiLoginDialog::~UiLoginDialog() { delete ui; }
 
-void LoginDialog::updateLoginInfo() {
+void UiLoginDialog::updateLoginInfo() {
     QStringList words     = MG->mDb->loginNameList();
     QCompleter *completer = new QCompleter(words);
     ui->lineLoginName->setCompleter(completer);
@@ -50,7 +50,7 @@ void LoginDialog::updateLoginInfo() {
             });
 }
 
-bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
+bool UiLoginDialog::eventFilter(QObject *watched, QEvent *event) {
     // watched表示需要关注的控件对象 event表示传递给事件对象的事件
     if (watched == ui->lineSecretKey) {
         if (event->type() == QEvent::KeyPress) {
@@ -64,7 +64,7 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event) {
     return QDialog::eventFilter(watched, event);
 }
 
-void LoginDialog::onBtnLoginClicked() {
+void UiLoginDialog::onBtnLoginClicked() {
     // 登录信息验证
     // if (ui->lineSecretId->text().trimmed() == "zhangsan" && ui->lineSecretKey->text().trimmed() == "123") {
     //     accept();
@@ -87,7 +87,7 @@ void LoginDialog::onBtnLoginClicked() {
     MG->mGate->send(API::LOGIN::NORMAL, params);
 }
 
-void LoginDialog::onLoginSucceed() {
+void UiLoginDialog::onLoginSucceed() {
     accept();
     if (ui->checkSaveSection->isChecked()) {
         // 保存登录信息
@@ -100,7 +100,7 @@ void LoginDialog::onLoginSucceed() {
     }
 }
 
-void LoginDialog::onLoginError(int api, const QString &msg) {
+void UiLoginDialog::onLoginError(int api, const QString &msg) {
     if (api != API::LOGIN::NORMAL) return;
     QMessageBox::warning(this, QString("登录失败"), QString("登录失败：%1").arg(msg));
 }

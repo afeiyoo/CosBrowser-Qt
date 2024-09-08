@@ -1,12 +1,12 @@
-﻿#include "basedialog.h"
+﻿#include "uibasedialog.h"
 
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPushButton>
 
-#include "ui_basedialog.h"
+#include "ui_uibasedialog.h"
 
-BaseDialog::BaseDialog(QWidget *parent) : QDialog(parent), m_ui(new Ui::BaseDialog) {
+UiBaseDialog::UiBaseDialog(QWidget *parent) : QDialog(parent), m_ui(new Ui::UiBaseDialog) {
     m_ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint | Qt::Window);
 
@@ -16,21 +16,21 @@ BaseDialog::BaseDialog(QWidget *parent) : QDialog(parent), m_ui(new Ui::BaseDial
     m_ui->labelLogo->setFixedSize(28, 28);
 }
 
-BaseDialog::~BaseDialog() { delete m_ui; }
+UiBaseDialog::~UiBaseDialog() { delete m_ui; }
 
-void BaseDialog::setTitle(const QString &title) { m_ui->labelTitle->setText(title); }
+void UiBaseDialog::setTitle(const QString &title) { m_ui->labelTitle->setText(title); }
 
-void BaseDialog::setLogo(const QString &path) {
+void UiBaseDialog::setLogo(const QString &path) {
     m_ui->labelLogo->setStyleSheet(QString("border-image: url(\"%1\");").arg(path));
 }
 
-void BaseDialog::addMinButton(const QString &path, const QString &hoverPath) {
+void UiBaseDialog::addMinButton(const QString &path, const QString &hoverPath) {
     QPushButton *btn = addButton(path, hoverPath);
-    connect(btn, &QPushButton::clicked, this, &BaseDialog::showMinimized);
+    connect(btn, &QPushButton::clicked, this, &UiBaseDialog::showMinimized);
 }
 
-void BaseDialog::addMaxButton(const QString &maxPath, const QString &maxPathHover, const QString &normalPath,
-                              const QString &normalPathHover) {
+void UiBaseDialog::addMaxButton(const QString &maxPath, const QString &maxPathHover, const QString &normalPath,
+                                const QString &normalPathHover) {
     QPushButton *btn = addButton(maxPath, maxPathHover);
 
     auto funcImg = [=]() {
@@ -45,7 +45,7 @@ void BaseDialog::addMaxButton(const QString &maxPath, const QString &maxPathHove
     funcImg();
 }
 
-QPushButton *BaseDialog::addButton(const QString &path, const QString &hoverPath) {
+QPushButton *UiBaseDialog::addButton(const QString &path, const QString &hoverPath) {
     QPushButton *btn = new QPushButton;
     btn->setFixedSize(m_sz, m_sz);
     setButtonImage(btn, path, hoverPath);
@@ -53,13 +53,13 @@ QPushButton *BaseDialog::addButton(const QString &path, const QString &hoverPath
     return btn;
 }
 
-void BaseDialog::setButtonImage(QPushButton *btn, const QString &path, const QString &hoverPath) {
+void UiBaseDialog::setButtonImage(QPushButton *btn, const QString &path, const QString &hoverPath) {
     btn->setStyleSheet(QString("QPushButton{border-image: url(\"%1\");}"
                                "QPushButton:hover{border-image: url(\"%2\");}")
                            .arg(path, hoverPath));
 }
 
-void BaseDialog::setAllButtonSize(int w) {
+void UiBaseDialog::setAllButtonSize(int w) {
     QList<QPushButton *> btnList = m_ui->frameTitle->findChildren<QPushButton *>();
     for (auto *btn : btnList) {
         btn->setFixedSize(w, w);
@@ -67,14 +67,14 @@ void BaseDialog::setAllButtonSize(int w) {
     m_sz = w;
 }
 
-void BaseDialog::mousePressEvent(QMouseEvent *event) {
+void UiBaseDialog::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         m_start = event->pos();  // 相对于父控件坐标原点的位置
     }
     QDialog::mousePressEvent(event);
 }
 
-void BaseDialog::mouseMoveEvent(QMouseEvent *event) {
+void UiBaseDialog::mouseMoveEvent(QMouseEvent *event) {
     if (event->buttons() & Qt::LeftButton) {
         QPoint targetPos = event->pos() - m_start + pos();
         this->move(targetPos);
@@ -82,15 +82,15 @@ void BaseDialog::mouseMoveEvent(QMouseEvent *event) {
     QDialog::mouseMoveEvent(event);
 }
 
-QWidget *BaseDialog::body() { return m_ui->widgetBody; }
+QWidget *UiBaseDialog::body() { return m_ui->widgetBody; }
 
-void BaseDialog::addCloseButton(const QString &path, const QString &hoverPath) {
+void UiBaseDialog::addCloseButton(const QString &path, const QString &hoverPath) {
     setButtonImage(m_ui->btnClose, path, hoverPath);
     m_ui->horizontalLayout->addWidget(m_ui->btnClose);
-    connect(m_ui->btnClose, &QPushButton::clicked, this, &BaseDialog::reject);
+    connect(m_ui->btnClose, &QPushButton::clicked, this, &UiBaseDialog::reject);
 }
 
-void BaseDialog::addWidget(QWidget *w) {
+void UiBaseDialog::addWidget(QWidget *w) {
     int i = m_ui->horizontalLayout->indexOf(m_ui->btnClose);
     m_ui->horizontalLayout->insertWidget(i, w);
 }

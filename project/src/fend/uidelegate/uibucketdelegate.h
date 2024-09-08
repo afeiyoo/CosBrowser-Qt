@@ -1,13 +1,13 @@
-#ifndef BUCKETDELEGATE_H
-#define BUCKETDELEGATE_H
+#ifndef UIBUCKETDELEGATE_H
+#define UIBUCKETDELEGATE_H
 
 #include <QStyledItemDelegate>
 #include <QWidget>
 
-class BucketDelegate : public QStyledItemDelegate {
+class UiBucketDelegate : public QStyledItemDelegate {
     Q_OBJECT
 public:
-    BucketDelegate(QObject *parent = nullptr);
+    UiBucketDelegate(QObject *parent = nullptr);
 
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
@@ -15,4 +15,4 @@ public:
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 };
 
-#endif  // BUCKETDELEGATE_H
+#endif  // UIBUCKETDELEGATE_H
