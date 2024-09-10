@@ -1,5 +1,6 @@
 #include <QApplication>
 
+#include "src/fend/uicom/uipagewidget.h"
 #include "src/fend/uilogin/uilogindialog.h"
 #include "src/fend/uimain/uimain.h"
 #include "src/middle/manglobal.h"
@@ -9,7 +10,7 @@ int main(int argc, char *argv[]) {
 
     MG->init(argc, argv);
 
-    UiMain      w;
+    UiMain        w;
     UiLoginDialog login;
 
     login.show();
