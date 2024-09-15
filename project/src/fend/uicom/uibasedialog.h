@@ -67,10 +67,13 @@ public:
      */
     void setAllButtonSize(int w = 20);
 
+    void setKeyDisabled();
+
 protected:
     void     mousePressEvent(QMouseEvent* event);
     void     mouseMoveEvent(QMouseEvent* event);
     QWidget* body();  // 为了让子界面也加入该窗口的对象树
+    bool     eventFilter(QObject* obj, QEvent* event);
 
 private:
     void addCloseButton(const QString& path, const QString& hoverPath);

@@ -17,6 +17,7 @@ UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
                  GLOBAL::PATH::NORMAL_HOVER_PATH);
     setTitle(QString("Qos Browser"));
     resize(1080, 640);
+    setKeyDisabled();  // 禁用esc或回车，导致窗口关闭
 
     // connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiMain::show);

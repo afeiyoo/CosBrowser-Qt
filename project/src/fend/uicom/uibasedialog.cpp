@@ -84,6 +84,18 @@ void UiBaseDialog::mouseMoveEvent(QMouseEvent *event) {
 
 QWidget *UiBaseDialog::body() { return m_ui->widgetBody; }
 
+bool UiBaseDialog::eventFilter(QObject *obj, QEvent *event) {
+    UiBaseDialog *pDialog = qobject_cast<UiBaseDialog *>(obj);
+    if (pDialog && event->type() == QEvent::KeyPress) {
+        QKeyEvent *pKeyEvent = static_cast<QKeyEvent *>(event);
+        if (pKeyEvent->key() == Qt::Key_Return || pKeyEvent->key() == Qt::Key_Escape ||
+            pKeyEvent->key() == Qt::Key_Enter) {
+            return true;
+        }
+    }
+    return QObject::eventFilter(obj, event);
+}
+
 void UiBaseDialog::addCloseButton(const QString &path, const QString &hoverPath) {
     setButtonImage(m_ui->btnClose, path, hoverPath);
     m_ui->horizontalLayout->addWidget(m_ui->btnClose);
@@ -94,3 +106,5 @@ void UiBaseDialog::addWidget(QWidget *w) {
     int i = m_ui->horizontalLayout->indexOf(m_ui->btnClose);
     m_ui->horizontalLayout->insertWidget(i, w);
 }
+
+void UiBaseDialog::setKeyDisabled() { installEventFilter(this); }
