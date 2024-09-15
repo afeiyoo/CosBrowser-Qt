@@ -9,7 +9,7 @@ VersionCmd::VersionCmd(int argc, char *argv[]) {
 
 void VersionCmd::setVersion() {
     if (!isValid()) {
-        throw QString::fromLocal8Bit("命令行格式错误 %1").arg(m_argv.join("."));
+        throw QString("命令行格式错误 %1").arg(m_argv.join("."));
     }
 
     m_major = m_argv[0];

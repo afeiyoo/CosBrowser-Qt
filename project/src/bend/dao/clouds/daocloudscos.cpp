@@ -36,7 +36,7 @@ QList<MyBucket> DaoCloudsCos::buckets() {
             res.append(b);
         }
     } else {
-        QString msg = QString::fromLocal8Bit("腾讯云错误码【%1】： %2")
+        QString msg = QString("腾讯云错误码【%1】： %2")
                           .arg(result.GetErrorCode().c_str(), result.GetErrorMsg().c_str());
         throw BaseException(EC_211000, msg);
     }
@@ -69,7 +69,7 @@ QString DaoCloudsCos::getBucketLocation(const QString &bucketName) {
     MyBucket bucket = getBucketByName(bucketName);
     if (bucket.isValid()) return bucket.location;
 
-    throw BaseException(EC_332000, QString::fromLocal8Bit("获取同位置失败 %1").arg(bucketName));
+    throw BaseException(EC_332000, QString("获取同位置失败 %1").arg(bucketName));
 }
 
 void DaoCloudsCos::putBucket(const QString &bucketName, const QString &location) {
