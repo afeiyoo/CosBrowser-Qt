@@ -3,9 +3,11 @@
 #include <QJsonObject>
 
 #include "src/bend/gateway/gateway.h"
+#include "src/bend/man/mancloud.h"
 #include "src/config/apis.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
+#include "src/middle/signals/mansignals.h"
 #include "ui_uiobjectstablewidget.h"
 
 UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiObjectsTableWidget) {
@@ -29,8 +31,29 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
 
     // 设置单元格不可编辑
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiObjectsTableWidget::onObjectsSuccess);
 }
 
 UiObjectsTableWidget::~UiObjectsTableWidget() { delete ui; }
 
 void UiObjectsTableWidget::on_btnBuckets_clicked() { MG->mGate->send(API::BUCKETS::LIST); }
+
+void UiObjectsTableWidget::on_tableView_doubleClicked(const QModelIndex &index) {
+    MyObject obj = index.data(Qt::UserRole).value<MyObject>();
+
+    if (obj.isDir()) {
+        QJsonObject params;
+        params["bucketName"] = MG->mCloud->currentBucketName();
+        params["dir"]        = obj.key;
+
+        MG->mGate->send(API::OBJECTS::LIST, params);
+    }
+}
+
+void UiObjectsTableWidget::onObjectsSuccess(const QList<MyObject> &objects) {
+    // 更新面包屑显示
+    QString path = MG->mCloud->currentBucketName() + "/" + MG->mCloud->currentDir();
+
+    ui->widgetBread->setPath(path);
+}

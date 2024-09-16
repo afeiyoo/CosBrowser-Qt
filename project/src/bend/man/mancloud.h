@@ -31,8 +31,16 @@ public:
 
     void putObjcet(const QString& jobId, const QString& bucketName, const QString& key, const QString& localPath);
 
+    QString currentBucketName() const;
+
+    QString currentDir() const;
+
 private:
     void bucketsAlready(const QList<MyBucket>& buckets);
+
+private:
+    QString m_currentBucketName;  // 记录当前对象所在存储桶名称
+    QString m_currentDir;         // 记录当前对象所在目录
 };
 
 #endif  // MANCLOUD_H

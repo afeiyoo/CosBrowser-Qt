@@ -47,8 +47,6 @@ void UiBucketsTableWidget::on_tableView_doubleClicked(const QModelIndex &index) 
         params["bucketName"] = index.data().toString();
         params["dir"]        = "";
 
-        qDebug("bucketName %s", qPrintable(index.data().toString()));
-
         MG->mGate->send(API::OBJECTS::LIST, params);
     }
 }

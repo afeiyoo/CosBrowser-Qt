@@ -23,9 +23,12 @@ struct MyBucket : public BaseObject {
 Q_DECLARE_METATYPE(MyBucket);
 
 struct MyObject : public BaseObject {
+    bool       isDir() const { return isValid() && name.endsWith("/"); }
+    bool       isFile() const { return isValid() && !name.endsWith("/"); }
     QString    lastmodified;
     qulonglong size = 0;
     QString    dir;
+    QString    key;
 };
 Q_DECLARE_METATYPE(MyObject);
 

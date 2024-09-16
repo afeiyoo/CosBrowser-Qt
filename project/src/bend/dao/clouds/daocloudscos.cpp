@@ -36,8 +36,8 @@ QList<MyBucket> DaoCloudsCos::buckets() {
             res.append(b);
         }
     } else {
-        QString msg = QString("腾讯云错误码【%1】： %2")
-                          .arg(result.GetErrorCode().c_str(), result.GetErrorMsg().c_str());
+        QString msg =
+            QString("腾讯云错误码【%1】： %2").arg(result.GetErrorCode().c_str(), result.GetErrorMsg().c_str());
         throw BaseException(EC_211000, msg);
     }
     //    throwError(result);
@@ -174,6 +174,7 @@ QList<MyObject> DaoCloudsCos::getDirList(qcloud_cos::GetBucketResp &resp, const 
         object.dir          = dir;
         object.name         = key.mid(dir.size());
         object.lastmodified = "-";
+        object.key          = key;
         res.append(object);
         qDebug() << "dirName: " << object.name;
     }
@@ -196,6 +197,7 @@ QList<MyObject> DaoCloudsCos::getFileList(qcloud_cos::GetBucketResp &resp, const
             object.lastmodified = QString(content.m_last_modified.c_str());
             object.size         = QString(content.m_size.c_str()).toULongLong();
             object.dir          = dir;
+            object.key          = key;
             res.append(object);
             qDebug() << "fileName: " << object.name;
         }

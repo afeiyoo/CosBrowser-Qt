@@ -35,6 +35,8 @@ void ManCloud::deleteBucket(const QString &bucketName) {
 
 void ManCloud::getObjects(const QString &bucketName, const QString &dir) {
     QList<MyObject> objs = MG->mPlugin->clouds()->getObjects(bucketName, dir);
+    m_currentBucketName  = bucketName;
+    m_currentDir         = dir;
 
     emit MG->mSignal->objectsSuccess(objs);
 }
@@ -63,4 +65,18 @@ void ManCloud::putObjcet(const QString &jobId, const QString &bucketName, const 
     emit MG->mSignal->uploadSuccess(jobId);
 }
 
-void ManCloud::bucketsAlready(const QList<MyBucket> &buckets) { emit MG->mSignal->bucketsSuccess(buckets); }
+void ManCloud::bucketsAlready(const QList<MyBucket> &buckets) {
+    m_currentBucketName.clear();
+    m_currentDir.clear();
+    emit MG->mSignal->bucketsSuccess(buckets);
+}
+
+QString ManCloud::currentDir() const
+{
+    return m_currentDir;
+}
+
+QString ManCloud::currentBucketName() const
+{
+    return m_currentBucketName;
+}

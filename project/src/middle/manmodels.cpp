@@ -41,6 +41,9 @@ void ManModels::setObjects(const QList<MyObject>& objects) {
         // 名称
         QModelIndex index0 = m_modelObjects->index(i, 0);
         m_modelObjects->setData(index0, obj.name);
+        QVariant var;
+        var.setValue(obj);
+        m_modelObjects->setData(index0, var, Qt::UserRole);
         // 大小
         QModelIndex index1 = m_modelObjects->index(i, 1);
         m_modelObjects->setData(index1, obj.size);

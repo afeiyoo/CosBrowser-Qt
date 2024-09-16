@@ -1,6 +1,7 @@
 #ifndef UIOBJECTSTABLEWIDGET_H
 #define UIOBJECTSTABLEWIDGET_H
 
+#include "src/middle/models/cloudmodels.h"
 #include <QWidget>
 
 namespace Ui {
@@ -16,6 +17,11 @@ public:
 
 private slots:
     void on_btnBuckets_clicked();
+
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
+    // 获取对象列表成功
+    void onObjectsSuccess(const QList<MyObject> &objects);
 
 private:
     Ui::UiObjectsTableWidget *ui;
