@@ -62,8 +62,7 @@ void UiBreadWidget::onItemClicked(const QModelIndex &index) {
         qDebug() << "refresh" << oldPath;
     } else {
         QString newPath = getPath(newItem);
-        int     idx     = newItem->row();
-        m_model->removeRows(idx + 1, m_model->rowCount() - (idx + 1));
+
         emit pathChanged(newPath);
         qDebug() << "pathChange" << newPath;
     }

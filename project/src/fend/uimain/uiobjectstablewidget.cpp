@@ -33,6 +33,7 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiObjectsTableWidget::onObjectsSuccess);
+    connect(ui->widgetBread, &UiBreadWidget::pathChanged, this, &UiObjectsTableWidget::onPathChanged);
 }
 
 UiObjectsTableWidget::~UiObjectsTableWidget() { delete ui; }
@@ -56,4 +57,17 @@ void UiObjectsTableWidget::onObjectsSuccess(const QList<MyObject> &objects) {
     QString path = MG->mCloud->currentBucketName() + "/" + MG->mCloud->currentDir();
 
     ui->widgetBread->setPath(path);
+}
+
+void UiObjectsTableWidget::onPathChanged(const QString &newPath) {
+    // newPath = file-1300416378/test/bll
+    // 需要将newPath转换为test/bll/
+    QString key = newPath + "/";
+    key         = key.mid(key.indexOf("/") + 1);
+
+    QJsonObject params;
+    params["bucketName"] = MG->mCloud->currentBucketName();
+    params["dir"]        = key;
+
+    MG->mGate->send(API::OBJECTS::LIST, params);
 }

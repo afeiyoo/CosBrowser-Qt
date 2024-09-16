@@ -1,8 +1,9 @@
 #ifndef UIOBJECTSTABLEWIDGET_H
 #define UIOBJECTSTABLEWIDGET_H
 
-#include "src/middle/models/cloudmodels.h"
 #include <QWidget>
+
+#include "src/middle/models/cloudmodels.h"
 
 namespace Ui {
 class UiObjectsTableWidget;
@@ -22,6 +23,8 @@ private slots:
 
     // 获取对象列表成功
     void onObjectsSuccess(const QList<MyObject> &objects);
+
+    void onPathChanged(const QString &newPath);
 
 private:
     Ui::UiObjectsTableWidget *ui;
