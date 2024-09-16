@@ -15,6 +15,7 @@ UiBucketsListWidget::UiBucketsListWidget(QWidget *parent) : QWidget(parent), ui(
 
     connect(MG->mSignal, &ManSignals::bucketsSuccess, this, &UiBucketsListWidget::onBucketsSuccess);
     connect(ui->lineEdit, &UiComboLine::itemSelected, this, &UiBucketsListWidget::showBucketObjects);
+    connect(ui->lineEdit, &UiComboLine::textEdited, this, &UiBucketsListWidget::onTextEdited);
 }
 
 UiBucketsListWidget::~UiBucketsListWidget() { delete ui; }
@@ -37,4 +38,12 @@ void UiBucketsListWidget::showBucketObjects(const QString &bucketName) {
     params["dir"]        = "";
 
     MG->mGate->send(API::OBJECTS::LIST, params);
+}
+
+void UiBucketsListWidget::onTextEdited(const QString &text) {
+    QStandardItemModel *model = MG->mModels->modelBuckets();
+    for (int i = 0; i < model->rowCount(); ++i) {
+        bool hidden = !(model->index(i, 0).data().toString().contains(text));
+        ui->listView->setRowHidden(i, hidden);
+    }
 }

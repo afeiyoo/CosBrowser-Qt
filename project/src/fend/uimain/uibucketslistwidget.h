@@ -20,6 +20,7 @@ private slots:
     void on_listView_doubleClicked(const QModelIndex &index);
     void onBucketsSuccess(const QList<MyBucket> &buckets);
     void showBucketObjects(const QString &bucketName);
+    void onTextEdited(const QString &text);
 
 private:
     Ui::UiBucketsListWidget *ui;
