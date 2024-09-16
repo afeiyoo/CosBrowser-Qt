@@ -29,6 +29,8 @@ UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
     // connect(ui->widgetToolBar, &ToolBarWidget::buttonClicked, this, &UiMain::onButtonClicked);
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiMain::show);
     connect(MG->mSignal, &ManSignals::unLogin, this, &UiMain::onUnLogin);
+    connect(MG->mSignal, &ManSignals::bucketsSuccess, this, &UiMain::onBucketsSuccess);
+    connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiMain::onObjectsSuccess);
 }
 
 UiMain::~UiMain() { delete ui; }
@@ -49,3 +51,7 @@ void UiMain::onDownload() { qDebug() << "onDownload"; }
 void UiMain::onRefresh() { qDebug() << "onRefresh"; }
 
 void UiMain::onUnLogin() { hide(); }
+
+void UiMain::onBucketsSuccess(const QList<MyBucket> &buckets) { ui->stackedWidget->setCurrentIndex(0); }
+
+void UiMain::onObjectsSuccess(const QList<MyObject> &objects) { ui->stackedWidget->setCurrentIndex(1); }

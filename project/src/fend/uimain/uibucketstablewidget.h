@@ -15,6 +15,8 @@ public:
     explicit UiBucketsTableWidget(QWidget *parent = nullptr);
     ~UiBucketsTableWidget();
 
+private slots:
+    void on_tableView_doubleClicked(const QModelIndex &index);
 private:
     Ui::UiBucketsTableWidget *ui;
 };

@@ -1,7 +1,10 @@
 #include "uibucketstablewidget.h"
 
+#include <QJsonObject>
 #include <QStandardItemModel>
 
+#include "src/bend/gateway/gateway.h"
+#include "src/config/apis.h"
 #include "src/fend/uidelegate/uibucketdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
@@ -10,16 +13,9 @@
 UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiBucketsTableWidget) {
     ui->setupUi(this);
 
-    ui->tableView->setModel(MG->mModels->model());
+    ui->tableView->setModel(MG->mModels->modelBuckets());
     // 为第1列（从0开始）指定代理
-    ui->tableView->setItemDelegateForColumn(1, new UiBucketDelegate());
-
-    // 设置标题内容
-    QStandardItemModel *model = MG->mModels->model();
-    QStringList         labels;
-    labels << QString("桶名称") << QString("地区") << QString("创建时间");
-    model->setColumnCount(labels.size());
-    model->setHorizontalHeaderLabels(labels);
+    // ui->tableView->setItemDelegateForColumn(1, new UiBucketDelegate());
 
     // 设置列宽度
     ui->tableView->setColumnWidth(0, 200);
@@ -34,10 +30,25 @@ UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), u
     ui->tableView->setSortingEnabled(true);
 
     // 设置视图选择行为：行，列，单元格
-    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     // 设置视图选择模式：单选，多选
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    // 设置单元格不可编辑
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 UiBucketsTableWidget::~UiBucketsTableWidget() { delete ui; }
+
+void UiBucketsTableWidget::on_tableView_doubleClicked(const QModelIndex &index) {
+    if (index.column() == 0) {
+        QJsonObject params;
+        params["bucketName"] = index.data().toString();
+        params["dir"]        = "";
+
+        qDebug("bucketName %s", qPrintable(index.data().toString()));
+
+        MG->mGate->send(API::OBJECTS::LIST, params);
+    }
+}

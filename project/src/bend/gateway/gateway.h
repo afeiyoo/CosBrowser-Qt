@@ -1,6 +1,7 @@
 #ifndef GATEWAY_H
 #define GATEWAY_H
 
+#include <QJsonValue>
 #include <QObject>
 
 class GateWay : public QObject {
@@ -10,7 +11,7 @@ public:
 
     ~GateWay();
 
-    void send(int api, const QJsonValue& params);
+    void send(int api, const QJsonValue& params = QJsonValue());
 
 private:
     // 信号分发器

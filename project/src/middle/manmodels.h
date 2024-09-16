@@ -11,15 +11,26 @@ class ManModels : public QObject {
 public:
     explicit ManModels(QObject* parent = nullptr);
 
+    QStandardItemModel* modelBuckets() const;
+
+    QStandardItemModel* modelObjects() const;
+
+private slots:
     void setBuckets(const QList<MyBucket>& buckets);
 
-    QStandardItemModel* model() const;
+    void setObjects(const QList<MyObject>& objects);
+
+private:
+    void initBucketsTable();
+
+    void initObjectsTable();
 
 signals:
 
 private:
     // 由于1个模型对应多个视图，所以对该模型使用单例模式
-    QStandardItemModel* m_model = nullptr;
+    QStandardItemModel* m_modelBuckets = nullptr;  // 存储桶表格模型
+    QStandardItemModel* m_modelObjects = nullptr;  // 对象表格模型
 };
 
 #endif  // MANMODELS_H
