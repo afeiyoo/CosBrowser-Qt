@@ -32,6 +32,10 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
     // 设置单元格不可编辑
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+    // 初始化翻页按钮
+    ui->widgetPage->setMaxRowList(QList<int>() << 5 << 10 << 20);
+    connect(ui->widgetPage, &UiPageWidget::pageNumChanged, this, &UiObjectsTableWidget::onPageNumChanged);
+
     connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiObjectsTableWidget::onObjectsSuccess);
     connect(ui->widgetBread, &UiBreadWidget::pathChanged, this, &UiObjectsTableWidget::onPathChanged);
 }
@@ -57,6 +61,7 @@ void UiObjectsTableWidget::onObjectsSuccess(const QList<MyObject> &objects) {
     QString path = MG->mCloud->currentBucketName() + "/" + MG->mCloud->currentDir();
 
     ui->widgetBread->setPath(path);
+    ui->widgetPage->setTotalRow(objects.size());
 }
 
 void UiObjectsTableWidget::onPathChanged(const QString &newPath) {
@@ -70,4 +75,13 @@ void UiObjectsTableWidget::onPathChanged(const QString &newPath) {
     params["dir"]        = key;
 
     MG->mGate->send(API::OBJECTS::LIST, params);
+}
+
+void UiObjectsTableWidget::onPageNumChanged(int start, int maxLen) {
+    QStandardItemModel *model = MG->mModels->modelObjects();
+
+    for (int i = 0; i < model->rowCount(); i++) {
+        bool hidden = (i < start || (i >= start + maxLen));
+        ui->tableView->setRowHidden(i, hidden);
+    }
 }

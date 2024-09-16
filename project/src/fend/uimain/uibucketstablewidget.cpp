@@ -8,6 +8,7 @@
 #include "src/fend/uidelegate/uibucketdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
+#include "src/middle/signals/mansignals.h"
 #include "ui_uibucketstablewidget.h"
 
 UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiBucketsTableWidget) {
@@ -37,6 +38,12 @@ UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), u
 
     // 设置单元格不可编辑
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    // 初始化翻页按钮
+    ui->widgetPage->setMaxRowList(QList<int>() << 2 << 5 << 10);
+    connect(ui->widgetPage, &UiPageWidget::pageNumChanged, this, &UiBucketsTableWidget::onPageNumChanged);
+
+    connect(MG->mSignal, &ManSignals::bucketsSuccess, this, &UiBucketsTableWidget::onBucketsSuccess);
 }
 
 UiBucketsTableWidget::~UiBucketsTableWidget() { delete ui; }
@@ -49,4 +56,17 @@ void UiBucketsTableWidget::on_tableView_doubleClicked(const QModelIndex &index) 
 
         MG->mGate->send(API::OBJECTS::LIST, params);
     }
+}
+
+void UiBucketsTableWidget::onPageNumChanged(int start, int maxLen) {
+    QStandardItemModel *model = MG->mModels->modelBuckets();
+
+    for (int i = 0; i < model->rowCount(); i++) {
+        bool hidden = (i < start || (i >= start + maxLen));
+        ui->tableView->setRowHidden(i, hidden);
+    }
+}
+
+void UiBucketsTableWidget::onBucketsSuccess(const QList<MyBucket> &buckets) {
+    ui->widgetPage->setTotalRow(buckets.size());
 }
