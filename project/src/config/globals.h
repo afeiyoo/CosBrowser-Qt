@@ -19,6 +19,11 @@ static const QString NORMAL_PATH       = ":/static/imgs/Maximize-3.png";
 static const QString NORMAL_HOVER_PATH = ":/static/imgs/Maximize-4.png";
 static const QString MIN_PATH          = ":/static/imgs/Minimize-1.png";
 static const QString MIN_HOVER_PATH    = ":/static/imgs/Minimize-2.png";
+
+static const QString QUIT_PATH        = ":/static/imgs/Quit-1.png";
+static const QString QUIT_HOVER_PATH  = ":/static/imgs/Quit-2.png";
+static const QString TRANS_PATH       = ":/static/imgs/Trans-1.png";
+static const QString TRANS_HOVER_PATH = ":/static/imgs/Trans-2.png";
 };  // namespace PATH
 
 namespace SQLITE {

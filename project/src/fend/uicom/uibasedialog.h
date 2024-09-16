@@ -69,6 +69,12 @@ public:
 
     void setKeyDisabled();
 
+    /**
+     * @brief 添加标题栏分割线
+     * @param w 宽度
+     */
+    void addTitleLine(int w = 2);
+
 protected:
     void     mousePressEvent(QMouseEvent* event);
     void     mouseMoveEvent(QMouseEvent* event);

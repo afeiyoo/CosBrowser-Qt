@@ -40,9 +40,9 @@ SOURCES += \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
     $$PWD/src/fend/uilogin/uilogindialog.cpp \
-    $$PWD/src/fend/uimain/uibucketswidget.cpp \
+    $$PWD/src/fend/uimain/uibucketslistwidget.cpp \
     $$PWD/src/fend/uimain/uimain.cpp \
-    $$PWD/src/fend/uimain/uiobjectswidget.cpp \
+    $$PWD/src/fend/uimain/uiobjectstablewidget.cpp \
     $$PWD/src/fend/uimain/uitoolbarwidget.cpp \
     $$PWD/src/helper/dbsqlite.cpp \
     $$PWD/src/helper/filehelper.cpp \
@@ -50,7 +50,8 @@ SOURCES += \
     $$PWD/src/middle/manmodels.cpp \
     $$PWD/src/middle/models/cloudmodels.cpp \
     $$PWD/src/middle/signals/mansignals.cpp \
-    $$PWD/src/plugins/manplugin.cpp
+    $$PWD/src/plugins/manplugin.cpp \
+    $$PWD/src/fend/uimain/uibucketstablewidget.cpp
 
 HEADERS += \
     $$PWD/src/bend/dao/clouds/daoclouds.h \
@@ -81,9 +82,9 @@ HEADERS += \
     $$PWD/src/fend/uicom/uiqosdialog.h \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
     $$PWD/src/fend/uilogin/uilogindialog.h \
-    $$PWD/src/fend/uimain/uibucketswidget.h \
+    $$PWD/src/fend/uimain/uibucketslistwidget.h \
     $$PWD/src/fend/uimain/uimain.h \
-    $$PWD/src/fend/uimain/uiobjectswidget.h \
+    $$PWD/src/fend/uimain/uiobjectstablewidget.h \
     $$PWD/src/fend/uimain/uitoolbarwidget.h \
     $$PWD/src/helper/dbsqlite.h \
     $$PWD/src/helper/filehelper.h \
@@ -92,7 +93,8 @@ HEADERS += \
     $$PWD/src/middle/models/cloudmodels.h \
     $$PWD/src/middle/models/dbmodels.h \
     $$PWD/src/middle/signals/mansignals.h \
-    $$PWD/src/plugins/manplugin.h
+    $$PWD/src/plugins/manplugin.h \
+    $$PWD/src/fend/uimain/uibucketstablewidget.h
 
 
 FORMS += \
@@ -101,10 +103,11 @@ FORMS += \
     $$PWD/src/fend/uicom/uipagewidget.ui \
     $$PWD/src/fend/uicom/uiqosdialog.ui \
     $$PWD/src/fend/uilogin/uilogindialog.ui \
-    $$PWD/src/fend/uimain/uibucketswidget.ui \
+    $$PWD/src/fend/uimain/uibucketslistwidget.ui \
     $$PWD/src/fend/uimain/uimain.ui \
-    $$PWD/src/fend/uimain/uiobjectswidget.ui \
-    $$PWD/src/fend/uimain/uitoolbarwidget.ui
+    $$PWD/src/fend/uimain/uiobjectstablewidget.ui \
+    $$PWD/src/fend/uimain/uitoolbarwidget.ui \
+    $$PWD/src/fend/uimain/uibucketstablewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

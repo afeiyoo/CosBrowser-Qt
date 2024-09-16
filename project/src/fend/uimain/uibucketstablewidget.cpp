@@ -1,12 +1,15 @@
-#include "uiobjectswidget.h"
+#include "uibucketstablewidget.h"
+
+#include <QStandardItemModel>
 
 #include "src/fend/uidelegate/uibucketdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
-#include "ui_uiobjectswidget.h"
+#include "ui_uibucketstablewidget.h"
 
-UiObjectsWidget::UiObjectsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiObjectsWidget) {
+UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiBucketsTableWidget) {
     ui->setupUi(this);
+
     ui->tableView->setModel(MG->mModels->model());
     // 为第1列（从0开始）指定代理
     ui->tableView->setItemDelegateForColumn(1, new UiBucketDelegate());
@@ -37,4 +40,4 @@ UiObjectsWidget::UiObjectsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
-UiObjectsWidget::~UiObjectsWidget() { delete ui; }
+UiBucketsTableWidget::~UiBucketsTableWidget() { delete ui; }

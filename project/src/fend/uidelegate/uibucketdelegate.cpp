@@ -10,7 +10,7 @@ QWidget *UiBucketDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
     Q_UNUSED(index);
 
     QComboBox *box = new QComboBox(parent);  // 结束编辑时，这个box会自动释放
-    box->addItem("ap-bejin");
+    box->addItem("ap-beijin");
     box->addItem("ap-shanghai");
     box->addItem("ap-guangzhou");
     box->setFrame(false);

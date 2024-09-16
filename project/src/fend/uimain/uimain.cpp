@@ -1,6 +1,7 @@
 #include "uimain.h"
 
 #include <QDebug>
+#include <QPushButton>
 
 #include "src/config/globals.h"
 #include "src/middle/manglobal.h"
@@ -11,6 +12,12 @@ UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
     ui->setupUi(body());
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 4);
+
+    addButton(GLOBAL::PATH::TRANS_PATH, GLOBAL::PATH::TRANS_HOVER_PATH);
+    QPushButton *quitButton = addButton(GLOBAL::PATH::QUIT_PATH, GLOBAL::PATH::QUIT_HOVER_PATH);
+    connect(quitButton, &QPushButton::clicked, MG->mSignal, &ManSignals::unLogin);
+
+    addTitleLine();
 
     addMinButton(GLOBAL::PATH::MIN_PATH, GLOBAL::PATH::MIN_HOVER_PATH);
     addMaxButton(GLOBAL::PATH::MAX_PATH, GLOBAL::PATH::MAX_HOVER_PATH, GLOBAL::PATH::NORMAL_PATH,
