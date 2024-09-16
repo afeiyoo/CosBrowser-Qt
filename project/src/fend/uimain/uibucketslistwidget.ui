@@ -29,7 +29,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="UiComboLine" name="lineEdit"/>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">
@@ -51,6 +51,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>UiComboLine</class>
+   <extends>QLineEdit</extends>
+   <header>src/fend/uicom/uicomboline.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
