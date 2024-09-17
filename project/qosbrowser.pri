@@ -41,6 +41,7 @@ SOURCES += \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
     $$PWD/src/fend/uilogin/uilogindialog.cpp \
     $$PWD/src/fend/uimain/uibucketslistwidget.cpp \
+    $$PWD/src/fend/uimain/uicreatebucketdialog.cpp \
     $$PWD/src/fend/uimain/uimain.cpp \
     $$PWD/src/fend/uimain/uiobjectstablewidget.cpp \
     $$PWD/src/fend/uimain/uitoolbarwidget.cpp \
@@ -83,6 +84,7 @@ HEADERS += \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
     $$PWD/src/fend/uilogin/uilogindialog.h \
     $$PWD/src/fend/uimain/uibucketslistwidget.h \
+    $$PWD/src/fend/uimain/uicreatebucketdialog.h \
     $$PWD/src/fend/uimain/uimain.h \
     $$PWD/src/fend/uimain/uiobjectstablewidget.h \
     $$PWD/src/fend/uimain/uitoolbarwidget.h \
@@ -104,6 +106,7 @@ FORMS += \
     $$PWD/src/fend/uicom/uiqosdialog.ui \
     $$PWD/src/fend/uilogin/uilogindialog.ui \
     $$PWD/src/fend/uimain/uibucketslistwidget.ui \
+    $$PWD/src/fend/uimain/uicreatebucketdialog.ui \
     $$PWD/src/fend/uimain/uimain.ui \
     $$PWD/src/fend/uimain/uiobjectstablewidget.ui \
     $$PWD/src/fend/uimain/uitoolbarwidget.ui \

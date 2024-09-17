@@ -6,6 +6,7 @@
 #include "src/bend/gateway/gateway.h"
 #include "src/config/apis.h"
 #include "src/fend/uidelegate/uibucketdelegate.h"
+#include "src/fend/uimain/uicreatebucketdialog.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
 #include "src/middle/signals/mansignals.h"
@@ -69,4 +70,19 @@ void UiBucketsTableWidget::onPageNumChanged(int start, int maxLen) {
 
 void UiBucketsTableWidget::onBucketsSuccess(const QList<MyBucket> &buckets) {
     ui->widgetPage->setTotalRow(buckets.size());
+}
+
+void UiBucketsTableWidget::on_btnCreateBuckets_clicked() {
+    UiCreateBucketDialog dialog(this);
+    int                  ret = dialog.exec();
+    if (ret == QDialog::Accepted) {
+        MyBucket bucket = dialog.getBucket();
+        if (bucket.isValid()) {
+            QJsonObject params;
+            params["bucketName"] = bucket.name;
+            params["location"]   = bucket.location;
+
+            MG->mGate->send(API::BUCKETS::PUT, params);
+        }
+    }
 }
