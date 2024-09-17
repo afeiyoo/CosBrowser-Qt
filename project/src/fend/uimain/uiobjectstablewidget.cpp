@@ -43,6 +43,8 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
 
     // 关联上传成功信号
     connect(MG->mSignal, &ManSignals::uploadSuccess, this, &UiObjectsTableWidget::onUploadSuccess);
+    // 关联下载成功信号
+    connect(MG->mSignal, &ManSignals::downloadSuccess, this, &UiObjectsTableWidget::onDownloadSuccess);
 }
 
 UiObjectsTableWidget::~UiObjectsTableWidget() { delete ui; }
@@ -96,9 +98,7 @@ void UiObjectsTableWidget::on_btnRefresh_clicked() { onPathChanged(ui->widgetBre
 void UiObjectsTableWidget::onUploadSuccess(const QString &jobId) {
     on_btnRefresh_clicked();
 
-    QMessageBox box(QMessageBox::Information, QString("上传文件"), QString("上传文件成功"), QMessageBox::Ok);
-    box.setButtonText(QMessageBox::Ok, QString("确定"));
-    box.exec();
+    showMessage(QString("上传文件"), QString("上传文件成功"));
 }
 
 void UiObjectsTableWidget::on_btnUpload_clicked() {
@@ -121,4 +121,44 @@ void UiObjectsTableWidget::on_btnUpload_clicked() {
 
         lastDir = info.dir().absolutePath();  // 更新路径
     }
+}
+
+void UiObjectsTableWidget::on_btnDownload_clicked() {
+    QModelIndex idx = ui->tableView->currentIndex();
+    if (!idx.isValid()) {
+        showMessage(QString("下载文件"), QString("请选择要下载的文件"));
+        return;
+    }
+    MyObject obj = idx.data(Qt::UserRole).value<MyObject>();
+    if (obj.isDir()) {
+        showMessage(QString("下载文件"), QString("只能选择文件进行下载"));
+        return;
+    }
+    QString        name    = idx.data().toString();
+    static QString lastDir = "./";
+    QString filePath = QFileDialog::getSaveFileName(this, QString("下载文件"), FileHelper::joinPath(lastDir, name));
+    QFileInfo info(filePath);
+
+    QString jobId = QUuid::createUuid().toString();
+
+    filePath = filePath.replace("\\", "/");
+    QJsonObject params;
+    params["jobId"]      = jobId;
+    params["bucketName"] = MG->mCloud->currentBucketName();
+    params["key"]        = MG->mCloud->currentDir() + name;
+    params["localPath"]  = filePath;
+
+    MG->mGate->send(API::OBJECTS::GET, params);
+
+    lastDir = info.dir().absolutePath();  // 更新路径
+}
+
+void UiObjectsTableWidget::showMessage(const QString &title, const QString &info) {
+    QMessageBox box(QMessageBox::Information, title, info, QMessageBox::Ok);
+    box.setButtonText(QMessageBox::Ok, QString("确定"));
+    box.exec();
+}
+
+void UiObjectsTableWidget::onDownloadSuccess(const QString &jobId) {
+    showMessage(QString("下载文件"), QString("下载文件成功"));
 }

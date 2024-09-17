@@ -34,6 +34,12 @@ private slots:
 
     void onUploadSuccess(const QString &jobId);
 
+    void on_btnDownload_clicked();
+
+    void showMessage(const QString &title, const QString &info);
+
+    void onDownloadSuccess(const QString &jobId);
+
 private:
     Ui::UiObjectsTableWidget *ui;
 };
