@@ -85,3 +85,5 @@ void UiObjectsTableWidget::onPageNumChanged(int start, int maxLen) {
         ui->tableView->setRowHidden(i, hidden);
     }
 }
+
+void UiObjectsTableWidget::on_btnRefresh_clicked() { onPathChanged(ui->widgetBread->currentPath()); }

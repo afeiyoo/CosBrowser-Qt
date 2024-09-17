@@ -115,3 +115,5 @@ void UiBucketsTableWidget::onDelBucket() {
         }
     }
 }
+
+void UiBucketsTableWidget::on_btnRefresh_clicked() { MG->mGate->send(API::BUCKETS::LIST); }
