@@ -24,6 +24,7 @@ private slots:
     void on_btnCreateBuckets_clicked();
     void onDelBucket();
 
+    void on_btnRefresh_clicked();
 private:
     Ui::UiBucketsTableWidget *ui;
 };

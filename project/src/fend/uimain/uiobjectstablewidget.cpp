@@ -1,6 +1,8 @@
 #include "uiobjectstablewidget.h"
 
+#include <QFileDialog>
 #include <QJsonObject>
+#include <QMessageBox>
 
 #include "src/bend/gateway/gateway.h"
 #include "src/bend/man/mancloud.h"
@@ -38,6 +40,9 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
 
     connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiObjectsTableWidget::onObjectsSuccess);
     connect(ui->widgetBread, &UiBreadWidget::pathChanged, this, &UiObjectsTableWidget::onPathChanged);
+
+    // 关联上传成功信号
+    connect(MG->mSignal, &ManSignals::uploadSuccess, this, &UiObjectsTableWidget::onUploadSuccess);
 }
 
 UiObjectsTableWidget::~UiObjectsTableWidget() { delete ui; }
@@ -87,3 +92,33 @@ void UiObjectsTableWidget::onPageNumChanged(int start, int maxLen) {
 }
 
 void UiObjectsTableWidget::on_btnRefresh_clicked() { onPathChanged(ui->widgetBread->currentPath()); }
+
+void UiObjectsTableWidget::onUploadSuccess(const QString &jobId) {
+    on_btnRefresh_clicked();
+
+    QMessageBox box(QMessageBox::Information, QString("上传文件"), QString("上传文件成功"), QMessageBox::Ok);
+    box.setButtonText(QMessageBox::Ok, QString("确定"));
+    box.exec();
+}
+
+void UiObjectsTableWidget::on_btnUpload_clicked() {
+    static QString lastDir = "./";
+    // 1. 获取本地文件
+    QString   filePath = QFileDialog::getOpenFileName(this, QString("上传文件"), lastDir);
+    QFileInfo info(filePath);
+    if (info.isFile() && info.exists()) {
+        QString jobId = QUuid::createUuid().toString();
+
+        filePath = filePath.replace("\\", "/");
+
+        QJsonObject params;
+        params["jobId"]      = jobId;
+        params["bucketName"] = MG->mCloud->currentBucketName();
+        params["key"]        = MG->mCloud->currentDir() + info.fileName();
+        params["localPath"]  = filePath;
+
+        MG->mGate->send(API::OBJECTS::PUT, params);
+
+        lastDir = info.dir().absolutePath();  // 更新路径
+    }
+}

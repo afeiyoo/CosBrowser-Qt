@@ -28,6 +28,12 @@ private slots:
 
     void onPageNumChanged(int start, int maxLen);
 
+    void on_btnUpload_clicked();
+
+    void on_btnRefresh_clicked();
+
+    void onUploadSuccess(const QString &jobId);
+
 private:
     Ui::UiObjectsTableWidget *ui;
 };
