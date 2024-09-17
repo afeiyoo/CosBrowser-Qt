@@ -1,6 +1,8 @@
 #include "uibucketstablewidget.h"
 
+#include <QAction>
 #include <QJsonObject>
+#include <QMessageBox>
 #include <QStandardItemModel>
 
 #include "src/bend/gateway/gateway.h"
@@ -45,6 +47,12 @@ UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), u
     connect(ui->widgetPage, &UiPageWidget::pageNumChanged, this, &UiBucketsTableWidget::onPageNumChanged);
 
     connect(MG->mSignal, &ManSignals::bucketsSuccess, this, &UiBucketsTableWidget::onBucketsSuccess);
+
+    // 创建右键菜单
+    ui->tableView->setContextMenuPolicy(Qt::ActionsContextMenu);
+    QAction *delAction = new QAction(QString("删除桶"), this);
+    connect(delAction, &QAction::triggered, this, &UiBucketsTableWidget::onDelBucket);
+    ui->tableView->addAction(delAction);
 }
 
 UiBucketsTableWidget::~UiBucketsTableWidget() { delete ui; }
@@ -83,6 +91,27 @@ void UiBucketsTableWidget::on_btnCreateBuckets_clicked() {
             params["location"]   = bucket.location;
 
             MG->mGate->send(API::BUCKETS::PUT, params);
+        }
+    }
+}
+
+void UiBucketsTableWidget::onDelBucket() {
+    QModelIndex idx = ui->tableView->currentIndex();
+    if (idx.isValid()) {
+        QString name = idx.data().toString();
+        // int ret = QMessageBox::question(this, QString("删除桶"), QString("是否确认删除桶【%1】吗?").arg(name));
+        // 修改按钮内容为中文
+        QMessageBox box(QMessageBox::Question, QString("删除桶"), QString("是否确认删除桶【%1】吗?").arg(name),
+                        QMessageBox::Yes | QMessageBox::No);
+        box.setButtonText(QMessageBox::Yes, QString("删除"));
+        box.setButtonText(QMessageBox::No, QString("取消"));
+        int ret = box.exec();
+
+        if (ret == QMessageBox::Yes) {
+            QJsonObject params;
+            params["bucketName"] = name;
+
+            MG->mGate->send(API::BUCKETS::DEL, params);
         }
     }
 }
