@@ -109,7 +109,8 @@ void UiObjectsTableWidget::on_btnUpload_clicked() {
     if (info.isFile() && info.exists()) {
         QString jobId = QUuid::createUuid().toString();
 
-        filePath = filePath.replace("\\", "/");
+        filePath    = filePath.replace("\\", "/");
+        QString key = MG->mCloud->currentBucketName();
 
         QJsonObject params;
         params["jobId"]      = jobId;
@@ -120,6 +121,8 @@ void UiObjectsTableWidget::on_btnUpload_clicked() {
         MG->mGate->send(API::OBJECTS::PUT, params);
 
         lastDir = info.dir().absolutePath();  // 更新路径
+
+        emit MG->mSignal->startUpload(jobId, key, filePath);
     }
 }
 
@@ -140,8 +143,8 @@ void UiObjectsTableWidget::on_btnDownload_clicked() {
     QFileInfo info(filePath);
 
     QString jobId = QUuid::createUuid().toString();
+    filePath      = filePath.replace("\\", "/");
 
-    filePath = filePath.replace("\\", "/");
     QJsonObject params;
     params["jobId"]      = jobId;
     params["bucketName"] = MG->mCloud->currentBucketName();

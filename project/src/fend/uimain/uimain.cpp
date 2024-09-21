@@ -13,7 +13,8 @@ UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 4);
 
-    addButton(GLOBAL::PATH::TRANS_PATH, GLOBAL::PATH::TRANS_HOVER_PATH);
+    QPushButton *transButton = addButton(GLOBAL::PATH::TRANS_PATH, GLOBAL::PATH::TRANS_HOVER_PATH);
+    connect(transButton, &QPushButton::clicked, this, &UiMain::showTransfer);
     QPushButton *quitButton = addButton(GLOBAL::PATH::QUIT_PATH, GLOBAL::PATH::QUIT_HOVER_PATH);
     connect(quitButton, &QPushButton::clicked, MG->mSignal, &ManSignals::unLogin);
 
@@ -55,3 +56,10 @@ void UiMain::onUnLogin() { hide(); }
 void UiMain::onBucketsSuccess(const QList<MyBucket> &buckets) { ui->stackedWidget->setCurrentIndex(0); }
 
 void UiMain::onObjectsSuccess(const QList<MyObject> &objects) { ui->stackedWidget->setCurrentIndex(1); }
+
+void UiMain::showTransfer() {
+    if (!m_transfer) {
+        m_transfer = new UiTransfer(this);
+    }
+    m_transfer->show();
+}

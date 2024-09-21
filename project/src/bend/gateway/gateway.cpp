@@ -20,11 +20,11 @@ void GateWay::send(int api, const QJsonValue &params) {
             this->dispatch(api, params);
         } catch (BaseException e) {
             mError(e.msg());
-            emit MG->mSignal->error(api, e.msg());
+            emit MG->mSignal->error(api, e.msg(), params);
         } catch (...) {
             BaseException e = BaseException(EC_100000, QString("未知错误"));
             mError(e.msg());
-            emit MG->mSignal->error(api, e.msg());
+            emit MG->mSignal->error(api, e.msg(), params);
         }
     });
 }

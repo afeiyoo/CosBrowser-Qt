@@ -37,6 +37,7 @@ SOURCES += \
     $$PWD/src/fend/uicom/uibreadwidget.cpp \
     $$PWD/src/fend/uicom/uicomboline.cpp \
     $$PWD/src/fend/uicom/uipagewidget.cpp \
+    $$PWD/src/fend/uicom/uiprogresswidget.cpp \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
     $$PWD/src/fend/uilogin/uilogindialog.cpp \
@@ -45,6 +46,9 @@ SOURCES += \
     $$PWD/src/fend/uimain/uimain.cpp \
     $$PWD/src/fend/uimain/uiobjectstablewidget.cpp \
     $$PWD/src/fend/uimain/uitoolbarwidget.cpp \
+    $$PWD/src/fend/uitransfer/uitransfer.cpp \
+    $$PWD/src/fend/uitransfer/uiupload.cpp \
+    $$PWD/src/helper/bytehelper.cpp \
     $$PWD/src/helper/dbsqlite.cpp \
     $$PWD/src/helper/filehelper.cpp \
     $$PWD/src/middle/manglobal.cpp \
@@ -80,6 +84,7 @@ HEADERS += \
     $$PWD/src/fend/uicom/uibreadwidget.h \
     $$PWD/src/fend/uicom/uicomboline.h \
     $$PWD/src/fend/uicom/uipagewidget.h \
+    $$PWD/src/fend/uicom/uiprogresswidget.h \
     $$PWD/src/fend/uicom/uiqosdialog.h \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
     $$PWD/src/fend/uilogin/uilogindialog.h \
@@ -88,6 +93,9 @@ HEADERS += \
     $$PWD/src/fend/uimain/uimain.h \
     $$PWD/src/fend/uimain/uiobjectstablewidget.h \
     $$PWD/src/fend/uimain/uitoolbarwidget.h \
+    $$PWD/src/fend/uitransfer/uitransfer.h \
+    $$PWD/src/fend/uitransfer/uiupload.h \
+    $$PWD/src/helper/bytehelper.h \
     $$PWD/src/helper/dbsqlite.h \
     $$PWD/src/helper/filehelper.h \
     $$PWD/src/middle/manglobal.h \
@@ -103,6 +111,7 @@ FORMS += \
     $$PWD/src/fend/uicom/uibasedialog.ui \
     $$PWD/src/fend/uicom/uibreadwidget.ui \
     $$PWD/src/fend/uicom/uipagewidget.ui \
+    $$PWD/src/fend/uicom/uiprogresswidget.ui \
     $$PWD/src/fend/uicom/uiqosdialog.ui \
     $$PWD/src/fend/uilogin/uilogindialog.ui \
     $$PWD/src/fend/uimain/uibucketslistwidget.ui \
@@ -110,7 +119,9 @@ FORMS += \
     $$PWD/src/fend/uimain/uimain.ui \
     $$PWD/src/fend/uimain/uiobjectstablewidget.ui \
     $$PWD/src/fend/uimain/uitoolbarwidget.ui \
-    $$PWD/src/fend/uimain/uibucketstablewidget.ui
+    $$PWD/src/fend/uimain/uibucketstablewidget.ui \
+    $$PWD/src/fend/uitransfer/uitransfer.ui \
+    $$PWD/src/fend/uitransfer/uiupload.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

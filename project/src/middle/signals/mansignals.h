@@ -15,7 +15,7 @@ public:
 signals:
     void loginSuccess();
 
-    void error(int api, const QString& msg);
+    void error(int api, const QString& msg, const QJsonValue& req);
 
     void unLogin();
 
@@ -36,6 +36,12 @@ signals:
 
     // 上传对象成功
     void uploadSuccess(const QString& jobId);
+
+    // 开始上传
+    void startUpload(const QString& jobId, const QString& key, const QString& localPath);
+
+    // 开始下载
+    void startDownload(const QString& jobId, const QString& key, const QString& localPath, qulonglong total);
 };
 
 #endif  // MANSIGNALS_H
