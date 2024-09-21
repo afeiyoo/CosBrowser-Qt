@@ -143,6 +143,7 @@ void UiObjectsTableWidget::on_btnDownload_clicked() {
     QFileInfo info(filePath);
 
     QString jobId = QUuid::createUuid().toString();
+    QString key   = MG->mCloud->currentBucketName();
     filePath      = filePath.replace("\\", "/");
 
     QJsonObject params;
@@ -154,6 +155,8 @@ void UiObjectsTableWidget::on_btnDownload_clicked() {
     MG->mGate->send(API::OBJECTS::GET, params);
 
     lastDir = info.dir().absolutePath();  // 更新路径
+
+    emit MG->mSignal->startDownload(jobId, key, filePath, obj.size);
 }
 
 void UiObjectsTableWidget::showMessage(const QString &title, const QString &info) {

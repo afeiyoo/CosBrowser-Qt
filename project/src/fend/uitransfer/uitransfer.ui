@@ -36,7 +36,7 @@
        <string>上传</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tabDownload">
+     <widget class="UiDownload" name="tabDownload">
       <attribute name="title">
        <string>下载</string>
       </attribute>
@@ -50,6 +50,12 @@
    <class>UiUpload</class>
    <extends>QWidget</extends>
    <header>src/fend/uitransfer/uiupload.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>UiDownload</class>
+   <extends>QWidget</extends>
+   <header>src/fend/uitransfer/uidownload.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -46,6 +46,7 @@ SOURCES += \
     $$PWD/src/fend/uimain/uimain.cpp \
     $$PWD/src/fend/uimain/uiobjectstablewidget.cpp \
     $$PWD/src/fend/uimain/uitoolbarwidget.cpp \
+    $$PWD/src/fend/uitransfer/uidownload.cpp \
     $$PWD/src/fend/uitransfer/uitransfer.cpp \
     $$PWD/src/fend/uitransfer/uiupload.cpp \
     $$PWD/src/helper/bytehelper.cpp \
@@ -93,6 +94,7 @@ HEADERS += \
     $$PWD/src/fend/uimain/uimain.h \
     $$PWD/src/fend/uimain/uiobjectstablewidget.h \
     $$PWD/src/fend/uimain/uitoolbarwidget.h \
+    $$PWD/src/fend/uitransfer/uidownload.h \
     $$PWD/src/fend/uitransfer/uitransfer.h \
     $$PWD/src/fend/uitransfer/uiupload.h \
     $$PWD/src/helper/bytehelper.h \
@@ -120,6 +122,7 @@ FORMS += \
     $$PWD/src/fend/uimain/uiobjectstablewidget.ui \
     $$PWD/src/fend/uimain/uitoolbarwidget.ui \
     $$PWD/src/fend/uimain/uibucketstablewidget.ui \
+    $$PWD/src/fend/uitransfer/uidownload.ui \
     $$PWD/src/fend/uitransfer/uitransfer.ui \
     $$PWD/src/fend/uitransfer/uiupload.ui
 
