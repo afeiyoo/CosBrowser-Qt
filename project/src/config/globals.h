@@ -24,6 +24,10 @@ static const QString QUIT_PATH        = ":/static/imgs/Quit-1.png";
 static const QString QUIT_HOVER_PATH  = ":/static/imgs/Quit-2.png";
 static const QString TRANS_PATH       = ":/static/imgs/Trans-1.png";
 static const QString TRANS_HOVER_PATH = ":/static/imgs/Trans-2.png";
+
+static const QString BUCKET = ":/static/imgs/bucket.png";
+static const QString FILE   = ":/static/imgs/file.png";
+static const QString DIR    = ":/static/imgs/dir.png";
 };  // namespace PATH
 
 namespace SQLITE {

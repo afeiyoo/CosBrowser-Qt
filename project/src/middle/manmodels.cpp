@@ -22,6 +22,7 @@ void ManModels::setBuckets(const QList<MyBucket>& buckets) {
         QModelIndex     index0 = m_modelBuckets->index(i, 0);
         m_modelBuckets->setData(index0, bucket.name);
         m_modelBuckets->setData(index0, QString("存储桶名称: %1").arg(bucket.name), Qt::ToolTipRole);
+        m_modelBuckets->setData(index0, QIcon(GLOBAL::PATH::BUCKET), Qt::DecorationRole);
 
         QModelIndex index1 = m_modelBuckets->index(i, 1);
         m_modelBuckets->setData(index1, bucket.location);
@@ -44,6 +45,12 @@ void ManModels::setObjects(const QList<MyObject>& objects) {
         QVariant var;
         var.setValue(obj);
         m_modelObjects->setData(index0, var, Qt::UserRole);
+        if (obj.isDir()) {
+            m_modelObjects->setData(index0, QIcon(GLOBAL::PATH::DIR), Qt::DecorationRole);
+        } else {
+            m_modelObjects->setData(index0, QIcon(GLOBAL::PATH::FILE), Qt::DecorationRole);
+        }
+
         // 大小
         QModelIndex index1 = m_modelObjects->index(i, 1);
         m_modelObjects->setData(index1, obj.size);
