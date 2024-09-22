@@ -42,6 +42,7 @@ SOURCES += \
     $$PWD/src/fend/uicom/uipushbutton.cpp \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
+    $$PWD/src/fend/uidelegate/uitableitemdelegate.cpp \
     $$PWD/src/fend/uilogin/uilogindialog.cpp \
     $$PWD/src/fend/uimain/uibucketslistwidget.cpp \
     $$PWD/src/fend/uimain/uicreatebucketdialog.cpp \
@@ -92,6 +93,7 @@ HEADERS += \
     $$PWD/src/fend/uicom/uipushbutton.h \
     $$PWD/src/fend/uicom/uiqosdialog.h \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
+    $$PWD/src/fend/uidelegate/uitableitemdelegate.h \
     $$PWD/src/fend/uilogin/uilogindialog.h \
     $$PWD/src/fend/uimain/uibucketslistwidget.h \
     $$PWD/src/fend/uimain/uicreatebucketdialog.h \

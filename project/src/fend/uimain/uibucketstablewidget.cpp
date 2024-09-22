@@ -8,6 +8,7 @@
 #include "src/bend/gateway/gateway.h"
 #include "src/config/apis.h"
 #include "src/fend/uidelegate/uibucketdelegate.h"
+#include "src/fend/uidelegate/uitableitemdelegate.h"
 #include "src/fend/uimain/uicreatebucketdialog.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
@@ -54,6 +55,8 @@ UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), u
     connect(delAction, &QAction::triggered, this, &UiBucketsTableWidget::onDelBucket);
     ui->tableView->addAction(delAction);
 
+    ui->tableView->setItemDelegate(new UiTableItemDelegate(ui->tableView));
+
     ui->btnCreateBuckets->setProperty("style_button", "main");
 }
 
@@ -80,6 +83,12 @@ void UiBucketsTableWidget::onPageNumChanged(int start, int maxLen) {
 
 void UiBucketsTableWidget::onBucketsSuccess(const QList<MyBucket> &buckets) {
     ui->widgetPage->setTotalRow(buckets.size());
+
+    // 调整每一行的高度
+    QStandardItemModel *model = MG->mModels->modelBuckets();
+    for (int i = 0; i < model->rowCount(); i++) {
+        ui->tableView->setRowHeight(i, 40);
+    }
 }
 
 void UiBucketsTableWidget::on_btnCreateBuckets_clicked() {

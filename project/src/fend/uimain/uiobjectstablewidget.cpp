@@ -7,6 +7,7 @@
 #include "src/bend/gateway/gateway.h"
 #include "src/bend/man/mancloud.h"
 #include "src/config/apis.h"
+#include "src/fend/uidelegate/uitableitemdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/manmodels.h"
 #include "src/middle/signals/mansignals.h"
@@ -47,6 +48,8 @@ UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), u
     connect(MG->mSignal, &ManSignals::uploadSuccess, this, &UiObjectsTableWidget::onUploadSuccess);
     // 关联下载成功信号
     connect(MG->mSignal, &ManSignals::downloadSuccess, this, &UiObjectsTableWidget::onDownloadSuccess);
+
+    ui->tableView->setItemDelegate(new UiTableItemDelegate(ui->tableView));
 }
 
 UiObjectsTableWidget::~UiObjectsTableWidget() { delete ui; }
@@ -71,6 +74,11 @@ void UiObjectsTableWidget::onObjectsSuccess(const QList<MyObject> &objects) {
 
     ui->widgetBread->setPath(path);
     ui->widgetPage->setTotalRow(objects.size());
+
+    QStandardItemModel *model = MG->mModels->modelObjects();
+    for (int i = 0; i < model->rowCount(); i++) {
+        ui->tableView->setRowHeight(i, 40);
+    }
 }
 
 void UiObjectsTableWidget::onPathChanged(const QString &newPath) {
