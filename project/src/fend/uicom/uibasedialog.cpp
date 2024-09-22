@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include <QPushButton>
 
+#include "src/fend/uicom/uipushbutton.h"
 #include "ui_uibasedialog.h"
 
 UiBaseDialog::UiBaseDialog(QWidget *parent) : QDialog(parent), m_ui(new Ui::UiBaseDialog) {
@@ -46,7 +47,7 @@ void UiBaseDialog::addMaxButton(const QString &maxPath, const QString &maxPathHo
 }
 
 QPushButton *UiBaseDialog::addButton(const QString &path, const QString &hoverPath) {
-    QPushButton *btn = new QPushButton;
+    UiPushButton *btn = new UiPushButton;
     btn->setFixedSize(m_sz, m_sz);
     setButtonImage(btn, path, hoverPath);
     addWidget(btn);

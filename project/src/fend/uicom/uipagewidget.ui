@@ -80,7 +80,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="btnPre">
+    <widget class="UiPushButton" name="btnPre">
      <property name="maximumSize">
       <size>
        <width>25</width>
@@ -116,7 +116,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="btnNext">
+    <widget class="UiPushButton" name="btnNext">
      <property name="maximumSize">
       <size>
        <width>25</width>
@@ -135,6 +135,11 @@
    <class>UiComboLine</class>
    <extends>QLineEdit</extends>
    <header>src/fend/uicom/uicomboline.h</header>
+  </customwidget>
+  <customwidget>
+   <class>UiPushButton</class>
+   <extends>QPushButton</extends>
+   <header>src/fend/uicom/uipushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

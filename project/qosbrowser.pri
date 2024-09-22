@@ -39,6 +39,7 @@ SOURCES += \
     $$PWD/src/fend/uicom/uimessagebox.cpp \
     $$PWD/src/fend/uicom/uipagewidget.cpp \
     $$PWD/src/fend/uicom/uiprogresswidget.cpp \
+    $$PWD/src/fend/uicom/uipushbutton.cpp \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
     $$PWD/src/fend/uidelegate/uibucketdelegate.cpp \
     $$PWD/src/fend/uilogin/uilogindialog.cpp \
@@ -88,6 +89,7 @@ HEADERS += \
     $$PWD/src/fend/uicom/uimessagebox.h \
     $$PWD/src/fend/uicom/uipagewidget.h \
     $$PWD/src/fend/uicom/uiprogresswidget.h \
+    $$PWD/src/fend/uicom/uipushbutton.h \
     $$PWD/src/fend/uicom/uiqosdialog.h \
     $$PWD/src/fend/uidelegate/uibucketdelegate.h \
     $$PWD/src/fend/uilogin/uilogindialog.h \

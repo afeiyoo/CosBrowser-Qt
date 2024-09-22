@@ -42,28 +42,28 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="btnBuckets">
+       <widget class="UiPushButton" name="btnBuckets">
         <property name="text">
          <string>存储桶</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnRefresh">
+       <widget class="UiPushButton" name="btnRefresh">
         <property name="text">
          <string>刷新</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnUpload">
+       <widget class="UiPushButton" name="btnUpload">
         <property name="text">
          <string>上传</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnDownload">
+       <widget class="UiPushButton" name="btnDownload">
         <property name="text">
          <string>下载</string>
         </property>
@@ -108,6 +108,11 @@
    <extends>QWidget</extends>
    <header>src/fend/uicom/uibreadwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>UiPushButton</class>
+   <extends>QPushButton</extends>
+   <header>src/fend/uicom/uipushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -29,20 +29,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="UiComboLine" name="lineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="maximumSize">
-        <size>
-         <width>50</width>
-         <height>16777215</height>
-        </size>
-       </property>
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>搜索</string>
+        <string>搜索: </string>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="UiComboLine" name="lineEdit"/>
      </item>
     </layout>
    </item>

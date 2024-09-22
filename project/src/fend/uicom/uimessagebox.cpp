@@ -2,6 +2,7 @@
 
 #include <QPushButton>
 
+#include "src/fend/uicom/uipushbutton.h"
 #include "ui_uimessagebox.h"
 
 UiMessageBox::UiMessageBox(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMessageBox) {
@@ -22,7 +23,8 @@ QString UiMessageBox::showMessage(const QString &title, const QString &text, con
 
 void UiMessageBox::createBtns(const QStringList &textList) {
     for (const auto &text : qAsConst(textList)) {
-        QPushButton *btn = new QPushButton(text, this);
+        UiPushButton *btn = new UiPushButton(this);
+        btn->setText(text);
         connect(btn, &QPushButton::clicked, [=]() {
             m_text = text;
             accept();
