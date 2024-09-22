@@ -2,6 +2,8 @@
 
 #include <QCompleter>
 
+#include "src/fend/uidelegate/uitableitemdelegate.h"
+
 UiComboLine::UiComboLine(QWidget *parent) : QLineEdit(parent) { UiComboLine(QStringList(), parent); }
 
 UiComboLine::UiComboLine(const QStringList &words, QWidget *parent) : QLineEdit(parent) { setWords(words); }
@@ -9,8 +11,11 @@ UiComboLine::UiComboLine(const QStringList &words, QWidget *parent) : QLineEdit(
 void UiComboLine::setWords(const QStringList &words) {
     QCompleter *com = new QCompleter(words, this);
     // 取消下拉框的滚动条
-    com->popup()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    com->popup()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    QAbstractItemView *view = com->popup();
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setItemDelegate(new UiTableItemDelegate(view));
+    view->setCursor(Qt::PointingHandCursor);
     connect(com, QOverload<const QString &>::of(&QCompleter::activated),
             [=](const QString &text) { emit itemSelected(text); });
 
