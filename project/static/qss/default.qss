@@ -85,6 +85,35 @@ QAbstractItemView::item:selected {
     color: blue;
 }
 
+/*设置滚动条*/
+QScrollBar {
+    border: none;
+    background-color: transparent;
+}
+QScrollBar:horizontal {
+        height: 6px;
+}
+QScrollBar:vertical {
+        width: 6px;
+}
+QScrollBar::handle {
+        background: #aaaaaa;
+        border-radius: 3px;
+}
+QScrollBar::add-line, QScrollBar::sub-line {
+        border: none;
+}
+
+/*设置进度条*/
+QProgressBar {
+        background: #edeffc;
+        border-radius: 3px;
+}
+
+QProgressBar::chunk {
+        background: #647bfc;
+        border-radius: 3px;
+}
 
 
 /* QPushButton#btnLogin{
