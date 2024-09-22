@@ -115,6 +115,16 @@ QProgressBar::chunk {
         border-radius: 3px;
 }
 
+/*QTabWidget 去掉每个标签页的边框*/
+QTabWidget::pane{
+        border: none;
+}
+
+/*设置分割器*/
+QSplitter::handle:horizontal {
+        background-color: #dddddd;
+}
+
 
 /* QPushButton#btnLogin{
 	background: #1296db;
