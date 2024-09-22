@@ -2,6 +2,7 @@
 
 #include "src/config/apis.h"
 #include "src/fend/uicom/uiprogresswidget.h"
+#include "src/fend/uidelegate/uitableitemdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_uidownload.h"
@@ -13,12 +14,16 @@ UiDownload::UiDownload(QWidget* parent) : QWidget(parent), ui(new Ui::UiDownload
     connect(MG->mSignal, &ManSignals::downloadProcess, this, &UiDownload::onDownloadProcess);
     connect(MG->mSignal, &ManSignals::downloadSuccess, this, &UiDownload::onDownloadSuccess);
     connect(MG->mSignal, &ManSignals::error, this, &UiDownload::onError);
+
+    ui->tableWidget->setItemDelegate(new UiTableItemDelegate(ui->tableWidget));
 }
 
 UiDownload::~UiDownload() { delete ui; }
 
 void UiDownload::onStartDownload(const QString& jobId, const QString& key, const QString& localPath, qulonglong total) {
     ui->tableWidget->insertRow(0);
+    ui->tableWidget->setRowHeight(0, 40);
+
     QTableWidgetItem* item = new QTableWidgetItem(key);
     item->setData(Qt::UserRole, jobId);
     ui->tableWidget->setItem(0, 0, item);

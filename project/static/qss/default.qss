@@ -66,23 +66,21 @@ QPushButton[style_button="main"]:hover{
         background:#006eff;
 }
 
-QListView, QTableView {
+QAbstractItemView {
     border: none;
     border-top: 1px solid #dddddd;
 }
 
-QTableView::item {
+QTableView::item, QTableWidget::item {
     border-bottom: 1px solid #dddddd;
 }
 
-QListView::item, QTableView::item {
+QAbstractItemView::item {
     height: 30px;
 }
 
-QListView::item:hover,
-QListView::item:selected,
-QTableView::item:hover,
-QTableView::item:selected {
+QAbstractItemView::item:hover,
+QAbstractItemView::item:selected {
     background-color: #66dddddd;
     color: blue;
 }

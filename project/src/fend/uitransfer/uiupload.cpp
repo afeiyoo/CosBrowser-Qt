@@ -4,6 +4,7 @@
 
 #include "src/config/apis.h"
 #include "src/fend/uicom/uiprogresswidget.h"
+#include "src/fend/uidelegate/uitableitemdelegate.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_uiupload.h"
@@ -15,12 +16,16 @@ UiUpload::UiUpload(QWidget *parent) : QWidget(parent), ui(new Ui::UiUpload) {
     connect(MG->mSignal, &ManSignals::uploadProcess, this, &UiUpload::onUploadProcess);
     connect(MG->mSignal, &ManSignals::uploadSuccess, this, &UiUpload::onUploadSuccess);
     connect(MG->mSignal, &ManSignals::error, this, &UiUpload::onError);
+
+    ui->tableWidget->setItemDelegate(new UiTableItemDelegate(ui->tableWidget));
 }
 
 UiUpload::~UiUpload() { delete ui; }
 
 void UiUpload::onStartUpload(const QString &jobId, const QString &key, const QString &localPath) {
     ui->tableWidget->insertRow(0);  // 在首行插入
+    ui->tableWidget->setRowHeight(0, 40);
+
     QTableWidgetItem *item = new QTableWidgetItem(key);
     item->setData(Qt::UserRole, jobId);  // 可以通过jobId找到对应的行
     ui->tableWidget->setItem(0, 0, item);
