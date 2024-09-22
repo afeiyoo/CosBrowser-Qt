@@ -36,6 +36,7 @@ SOURCES += \
     $$PWD/src/fend/uicom/uibasedialog.cpp \
     $$PWD/src/fend/uicom/uibreadwidget.cpp \
     $$PWD/src/fend/uicom/uicomboline.cpp \
+    $$PWD/src/fend/uicom/uimessagebox.cpp \
     $$PWD/src/fend/uicom/uipagewidget.cpp \
     $$PWD/src/fend/uicom/uiprogresswidget.cpp \
     $$PWD/src/fend/uicom/uiqosdialog.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     $$PWD/src/fend/uicom/uibasedialog.h \
     $$PWD/src/fend/uicom/uibreadwidget.h \
     $$PWD/src/fend/uicom/uicomboline.h \
+    $$PWD/src/fend/uicom/uimessagebox.h \
     $$PWD/src/fend/uicom/uipagewidget.h \
     $$PWD/src/fend/uicom/uiprogresswidget.h \
     $$PWD/src/fend/uicom/uiqosdialog.h \
@@ -112,6 +114,7 @@ HEADERS += \
 FORMS += \
     $$PWD/src/fend/uicom/uibasedialog.ui \
     $$PWD/src/fend/uicom/uibreadwidget.ui \
+    $$PWD/src/fend/uicom/uimessagebox.ui \
     $$PWD/src/fend/uicom/uipagewidget.ui \
     $$PWD/src/fend/uicom/uiprogresswidget.ui \
     $$PWD/src/fend/uicom/uiqosdialog.ui \

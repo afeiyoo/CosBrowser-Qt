@@ -3,7 +3,9 @@
 #include <QDebug>
 #include <QPushButton>
 
+#include "src/config/apis.h"
 #include "src/config/globals.h"
+#include "src/fend/uicom/uimessagebox.h"
 #include "src/middle/manglobal.h"
 #include "src/middle/signals/mansignals.h"
 #include "ui_uimain.h"
@@ -32,6 +34,7 @@ UiMain::UiMain(QWidget *parent) : UiQosDialog(parent), ui(new Ui::UiMain) {
     connect(MG->mSignal, &ManSignals::unLogin, this, &UiMain::onUnLogin);
     connect(MG->mSignal, &ManSignals::bucketsSuccess, this, &UiMain::onBucketsSuccess);
     connect(MG->mSignal, &ManSignals::objectsSuccess, this, &UiMain::onObjectsSuccess);
+    connect(MG->mSignal, &ManSignals::error, this, &UiMain::onError);
 }
 
 UiMain::~UiMain() { delete ui; }
@@ -62,4 +65,11 @@ void UiMain::showTransfer() {
         m_transfer = new UiTransfer(this);
     }
     m_transfer->show();
+}
+
+void UiMain::onError(int api, const QString &msg, const QJsonValue &req) {
+    if (api > API::BUCKETS::BASE) {
+        UiMessageBox box;
+        box.showMessage(QString("错误"), msg);
+    }
 }

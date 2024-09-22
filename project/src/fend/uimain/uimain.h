@@ -32,6 +32,8 @@ private slots:
     // 显示传输窗口
     void showTransfer();
 
+    void onError(int api, const QString &msg, const QJsonValue &req);
+
 private:
     Ui::UiMain *ui;
     UiTransfer *m_transfer = nullptr;
