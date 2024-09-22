@@ -10,6 +10,8 @@ UiBreadWidget::UiBreadWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiBr
     setPath("");
     connect(ui->listView, &QListView::clicked, this, &UiBreadWidget::onItemClicked);
     setFixedHeight(30);
+
+    setCursor(Qt::PointingHandCursor);
 }
 
 UiBreadWidget::~UiBreadWidget() { delete ui; }
