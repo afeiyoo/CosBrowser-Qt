@@ -20,11 +20,12 @@ UiLoginDialog::UiLoginDialog(QWidget *parent) : UiQosDialog(parent), ui(new Ui::
 
     ui->lineSecretKey->installEventFilter(this);  // 对lineSecretKey安装事件过滤器
 
-    ui->labelSecretId->setProperty("style", "h5");
-    ui->labelLoginName->setProperty("style", "h5");
-    ui->labelSecretKey->setProperty("style", "h5");
-    ui->labelRemark->setProperty("style", "h5");
-    ui->btnLogin->setProperty("style", "h5");
+    ui->labelSecretId->setProperty("style_font", "h5");
+    ui->labelLoginName->setProperty("style_font", "h5");
+    ui->labelSecretKey->setProperty("style_font", "h5");
+    ui->labelRemark->setProperty("style_font", "h5");
+    ui->btnLogin->setProperty("style_font", "h5");
+    ui->btnLogin->setProperty("style_button", "main");
 
     connect(MG->mSignal, &ManSignals::loginSuccess, this, &UiLoginDialog::onLoginSucceed);
     connect(MG->mSignal, &ManSignals::unLogin, this, &UiLoginDialog::show);

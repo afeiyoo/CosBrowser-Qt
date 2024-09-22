@@ -9,7 +9,7 @@ UiQosDialog::UiQosDialog(QWidget *parent) : UiBaseDialog(parent), ui(new Ui::UiQ
     setLogo(GLOBAL::PATH::LOGO_PATH);
     setTitle(QString("Qos Browser"));
     m_ui->labelLogo->setFixedSize(32, 24);  // 要使用父窗口的ui对象，需要引入父窗口的ui头文件
-    m_ui->labelTitle->setProperty("style", "h4");
+    m_ui->labelTitle->setProperty("style_font", "h4");
 }
 
 UiQosDialog::~UiQosDialog() { delete ui; }

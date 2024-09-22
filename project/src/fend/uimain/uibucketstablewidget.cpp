@@ -53,6 +53,8 @@ UiBucketsTableWidget::UiBucketsTableWidget(QWidget *parent) : QWidget(parent), u
     QAction *delAction = new QAction(QString("删除桶"), this);
     connect(delAction, &QAction::triggered, this, &UiBucketsTableWidget::onDelBucket);
     ui->tableView->addAction(delAction);
+
+    ui->btnCreateBuckets->setProperty("style_button", "main");
 }
 
 UiBucketsTableWidget::~UiBucketsTableWidget() { delete ui; }

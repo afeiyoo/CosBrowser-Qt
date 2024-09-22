@@ -15,6 +15,8 @@
 UiObjectsTableWidget::UiObjectsTableWidget(QWidget *parent) : QWidget(parent), ui(new Ui::UiObjectsTableWidget) {
     ui->setupUi(this);
 
+    ui->btnBuckets->setProperty("style_button", "main");
+
     ui->tableView->setModel(MG->mModels->modelObjects());
 
     // 设置列宽度
